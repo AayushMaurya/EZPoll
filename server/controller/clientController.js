@@ -83,8 +83,8 @@ module.exports = {
         errors.registrationNumber = "Registration number not found";
         return res.status(404).json(errors);
       }
-      const isCorrect = await bcrypt.compare(password, client.password);
-      if (!isCorrect) {
+      // const isCorrect = await bcrypt.compare(password, client.password);
+      if (password != client.password) {
         errors.password = "Invalid Credentials";
         return res.status(404).json(errors);
       }

@@ -5,20 +5,24 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import setAuthToken from "./utils/setAuthToken";
 import decodeToken from "./utils/decodeToken";
 import { useSelector } from "react-redux";
-import { setAdmin } from "./redux/actions/adminAction";
+import { setAdmin, adminLogout } from "./redux/actions/adminAction";
+import { setClient, clientLogout } from "./redux/actions/clientAction";
 import store from "./redux/store";
-import Home from "./pages/Home";
-import { adminLogout } from "./redux/actions/adminAction";
 import Poll from "./pages/Poll";
 import AdminSignup from "./pages/admin/AdminSignup";
 import CreatePoll from "./pages/poll/CreatePoll";
 import ClientLogin from "./pages/client/ClientLogin";
 import ClientSignup from "./pages/client/ClientSignup";
 import ClientHome from "./pages/client/ClientHome";
+import Homepage from "./pages/Homepage";
+import Navbar from "./pages/Navbar";
+import './pages/index.css'
+import How from "./pages/How";
+import About from "./pages/About";
 
+// check for admin
 if (window.localStorage.adminJwtToken) {
-
-  console.log("this is problem")
+  console.log("admin is already logged in");
   const decode = decodeToken(localStorage.adminJwtToken);
   const currentTime = Date.now() / 1000;
   
@@ -30,7 +34,24 @@ if (window.localStorage.adminJwtToken) {
     setAuthToken(localStorage.adminJwtToken);
     store.dispatch(setAdmin(decode));
   }
+}
 
+// check for client
+else if(window.localStorage.clientJwtToken)
+{
+  console.log("client is already logged in")
+
+  const decode = decodeToken(localStorage.clientJwtToken);
+  const currentTime = Date.now() / 1000;
+
+  if (decode.exp < currentTime) {
+    store.dispatch(clientLogout());
+    window.location.href = '/';
+  }
+  else {
+    setAuthToken(localStorage.clientJwtToken);
+    store.dispatch(setClient(decode));
+  }
 }
 
 function App() {
@@ -38,15 +59,19 @@ function App() {
 
   return (
     <div>
+    
       <Router>
+      <Navbar />
         <Routes>
-          <Route exact path='/' element={<Home />} />
+          <Route exact path='/' element={<Homepage />} />
           <Route exact path='/adminLogin' element={<AdminLogin />} />
           <Route exact path='/admin' element={<AdminHome />} />
           <Route exact path='/adminSignup' element={<AdminSignup />} />
           <Route exact path='/clientLogin' element={<ClientLogin />} />
           <Route exact path='/clientSignup' element={<ClientSignup />} />
           <Route exact path='/client' element={<ClientHome />} />
+          <Route exact path='/how' element={<How />} />
+          <Route exact path='/about' element={<About />} />
           <Route exact path='/createPoll' element={<CreatePoll />} />
           <Route path="/poll/:id" element = {<Poll />} />
         </Routes>
