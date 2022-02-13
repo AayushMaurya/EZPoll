@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import decodeToken from "../../utils/decodeToken";
 import { setAdmin } from "../../redux/actions/adminAction";
-import { addNewAdmin, checkAdminLoginData} from "../../apis/adminApi"
+import { addNewAdmin, checkAdminLoginData } from "../../apis/adminApi"
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const AdminSignup = () => {
     const navigate = useNavigate();
-    const store= useSelector((store) => store);
+    const store = useSelector((store) => store);
     const [signupInfo, setSignupInfo] = useState({
         name: "",
         email: "",
@@ -23,9 +22,9 @@ const AdminSignup = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(store.admin.isAuthenticated){
+        if (store.admin.isAuthenticated) {
             navigate('/admin');
-        }      
+        }
     }, [store.admin.isAuthenticated])
 
     const changeHandler = (e) => {
@@ -43,8 +42,7 @@ const AdminSignup = () => {
         setIsLoading(true);
 
         const data = await addNewAdmin(signupInfo);
-        if(data.success)
-        {
+        if (data.success) {
             console.log("admin can be added");
 
             setLoginInfo({
@@ -53,18 +51,20 @@ const AdminSignup = () => {
             });
             console.log(loginInfo);
             // now logging in the created account
-            const token = await checkAdminLoginData(loginInfo);
-            if(token)
-            {
+            const token = await checkAdminLoginData({
+                registrationNumber: data.response.registrationNumber,
+                password: data.response.dob
+            });
+            if (token) {
                 const adminCridentials = decodeToken(token);
                 dispatch(setAdmin(adminCridentials));
             }
-            else{
+            else {
                 setIsLoading(false)
                 alert("login info is wrong");
             }
         }
-        else{
+        else {
             console.log(data.message);
             alert(data.message);
             isLoading(false);

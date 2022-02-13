@@ -17,3 +17,16 @@ export const checkClientLoginData = async (loginInfo) => {
         return false;
     }
 }
+
+export const addNewClient = async (signupInfo) => {
+    try{
+        const {data} = await axios.post("http://localhost:5000/api/client/addClient", signupInfo);
+
+        console.log(data);
+        return data;
+    }
+    catch(err){
+        setAuthToken(false);
+        return {success: false};
+    }
+}

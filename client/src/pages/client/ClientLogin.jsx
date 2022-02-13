@@ -33,6 +33,8 @@ const ClientLogin = () => {
         e.preventDefault();
         setIsLoading(true);
 
+        console.log("login info is: ", loginInfo);
+
         const token = await checkClientLoginData(loginInfo);
         if(token)
         {
