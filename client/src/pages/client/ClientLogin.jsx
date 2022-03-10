@@ -56,10 +56,10 @@ const ClientLogin = () => {
             <br />
             <dvi>
                 <form onSubmit={formHandler}>
-                    <label>Registration No. </label>
+                    <label>Username. </label>
                     <input type="text" name="registrationNumber" onChange={changeHandler} value={loginInfo.email} />
                     <br />
-                    <label>Registration No. </label>
+                    <label>Password </label>
                     <input type="text" name="password" onChange={changeHandler} value={loginInfo.password} />
                     <br />
                     {!isLoading && <button type="submit">Login</button>}
