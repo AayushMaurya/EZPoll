@@ -1,42 +1,54 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router";
 
-const CreatePoll = () => {
-    const [options, setOptions] = useState({})
-    const [formInfo, setFormInfo] = useState({
+const CreatePoll = () => { 
+
+    const [pollinfo, setPollInfo] = useState({
         title: "",
-        description: "",
-        options: options
+        desc: "",
+        option1: "",
+        option2: ""
     });
+    const [isCreated, setIsCreated] = useState(false);
 
     const changeHandler = (e) => {
-        let name=e.target.name;
+        let name = e.target.name;
         let value = e.target.value;
 
-        setFormInfo({
-            ...formInfo,
+        setPollInfo({
+            ...pollinfo,
             [name]: value
         });
     }
 
     const formHandler = (e) => {
         e.preventDefault();
-        console.log(formInfo);
+        
+        setIsCreated(true);
     }
 
     return (
         <>
-            <div>
-                <h1>Create a Poll</h1>
-                <form onSubmit={formHandler}>
-                    <label>Title: </label>
-                    <input type="text" name="title" value={formInfo.title} onChange={changeHandler} />
-                    <br />
-                    <label>Description: </label>
-                    <input type="text" name="description" value={formInfo.description} onChange={changeHandler} />
-                    <br />                 
-                    <button type="submit">Create</button>
-                </form>
-            </div>
+        {!isCreated && <div>
+        <h1>Create a poll</h1>
+        <form onSubmit={formHandler}>
+        <lable>Title: </lable>
+        <input type="text" name="title" required value={pollinfo.title} onChange={changeHandler} />
+        <br />
+        <lable>Description: </lable>
+        <input type="text" name="desc" value={pollinfo.desc} onChange={changeHandler} />
+        <br />
+        <lable>Answer options: </lable>
+        <input type="text" name="option1" required value={pollinfo.option1} onChange={changeHandler} />
+        <br />
+        <input type="text" name="option2" required value={pollinfo.option2} onChange={changeHandler} />
+        <br />
+        <button type="submit">Create</button>
+        </form>
+        </div>}
+        {isCreated && <div>
+            <h1>Your poll is successfull created</h1>
+        </div>}
         </>
     );
 }
