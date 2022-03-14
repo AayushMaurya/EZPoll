@@ -28,3 +28,18 @@ export const getPollInfo = async (poll_id) => {
         };
     }
 }
+
+export const submitPollChoice = async (userChoice) => {
+    const uri = "https://ezserver.herokuapp.com/api/poll/";
+    try{
+        const {data} = await axios.post(uri, userChoice);
+        return data;
+    }
+    catch (err) {
+        console.log(err);
+        return {
+            success: false,
+            message: "cannot take your vote"
+        }
+    }
+}

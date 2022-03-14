@@ -5,6 +5,7 @@ import decodeToken from "../../utils/decodeToken";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { checkClientLoginData } from "../../apis/clientApi";
+import { Link } from 'react-router-dom';
 
 const ClientLogin = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -64,6 +65,7 @@ const ClientLogin = () => {
                     <br />
                     {!isLoading && <button type="submit">Login</button>}
                 </form>
+                <div>Don't have an account <Link to="/clientSignup" >SignUp</Link></div>
             </dvi>
         </>
     );

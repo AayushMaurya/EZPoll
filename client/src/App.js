@@ -19,6 +19,8 @@ import Navbar from "./pages/Navbar";
 import './pages/index.css'
 import How from "./pages/How";
 import About from "./pages/About";
+import PollResult from "./pages/poll/PollResult";
+import OngoingPolls from "./pages/poll/OngoingPolls";
 
 // check for admin
 if (window.localStorage.adminJwtToken) {
@@ -73,7 +75,9 @@ function App() {
           <Route exact path='/how' element={<How />} />
           <Route exact path='/about' element={<About />} />
           <Route exact path='/createPoll' element={<CreatePoll />} />
-          <Route path="/poll/:id" element = {<Poll />} />
+          <Route exact path="/poll/:id" element = {<Poll />} />
+          <Route exact path="/pollResult/:id" element = {<PollResult />} />
+          <Route exact path="/polls" element = {<OngoingPolls />} />
         </Routes>
       </Router>
     </div>

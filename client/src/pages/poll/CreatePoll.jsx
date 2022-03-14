@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createPoll } from "../../apis/pollApi";
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 const CreatePoll = () => {
 
@@ -10,8 +12,16 @@ const CreatePoll = () => {
         choice2: "",
         choice3: ""
     });
+    const [isLoading, setIsLoading] = useState(false);
     const [isCreated, setIsCreated] = useState(false);
     const [poll_id, setpoll_id] = useState("");
+    const navigate = useNavigate();
+    const store= useSelector((store) => store);
+
+    useEffect(() => {
+        if(!store.client.isAuthenticated)
+            navigate('/clientSignup');
+    }, []);
 
     const changeHandler = (e) => {
         let name = e.target.name;
@@ -25,6 +35,7 @@ const CreatePoll = () => {
 
     const formHandler = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         var data = await createPoll(pollinfo);
 
@@ -33,8 +44,10 @@ const CreatePoll = () => {
             setIsCreated(true);
             setpoll_id(data.poll.poll_id);
         }
-        else
-            console.log("ayu");
+        else{
+            setIsLoading(false);
+            alert(data.message);
+        }
     }
 
     return (
@@ -55,7 +68,7 @@ const CreatePoll = () => {
                     <br />
                     <input type="text" name="choice3" required value={pollinfo.choice3} onChange={changeHandler} />
                     <br />
-                    <button type="submit">Create</button>
+                    {!isLoading && <button type="submit">Create</button>}
                 </form>
             </div>}
             {isCreated && <div>

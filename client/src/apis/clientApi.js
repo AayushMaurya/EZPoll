@@ -3,7 +3,7 @@ import setAuthToken from "../utils/setAuthToken";
 
 export const checkClientLoginData = async (loginInfo) => {
     try{
-        const { data } = await axios.post("http://localhost:5000/api/client/login", loginInfo);
+        const { data } = await axios.post("https://ezserver.herokuapp.com/api/client/login", loginInfo);
 
         const { token } = data;
 
@@ -20,13 +20,14 @@ export const checkClientLoginData = async (loginInfo) => {
 
 export const addNewClient = async (signupInfo) => {
     try{
-        const {data} = await axios.post("http://localhost:5000/api/client/addClient", signupInfo);
+        const {data} = await axios.post("https://ezserver.herokuapp.com/api/client/addClient", signupInfo);
 
         console.log(data);
         return data;
     }
     catch(err){
         setAuthToken(false);
-        return {success: false};
+        return {success: false,
+                message: "cannot create account at this moment"};
     }
 }
