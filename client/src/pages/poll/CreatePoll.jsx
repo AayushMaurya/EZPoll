@@ -19,6 +19,8 @@ const CreatePoll = () => {
     const store= useSelector((store) => store);
 
     useEffect(() => {
+        // iski wajah se back button press karne par wapas nhi ja pa rhe
+        // agar login nhi hai to loop me ho ja rha hai
         if(!store.client.isAuthenticated)
             navigate('/clientSignup');
     }, []);

@@ -9,8 +9,8 @@ const Poll = () => {
     const [isPoll, setIsPoll] = useState(false);
     const navigate = useNavigate();
     const [userChoice, setUserChoice] = useState({
+        // poll_id: id, ye backup hai
         _id: "",
-        poll_id: id,
         choice: ""
     });
     const [loadinSubmit, setLoadingSubmit] = useState(false);
@@ -47,6 +47,8 @@ const Poll = () => {
         e.preventDefault();
         setLoadingSubmit(true);
 
+        
+
         console.log("pollinfo: ", pollinfo);
         console.log("usechoice: ", userChoice);
 
@@ -54,7 +56,7 @@ const Poll = () => {
         if(data.success)
         {
             alert("choice successfully submited");
-            // navigate(`/pollResult/{id}`);
+            navigate(`/pollResult/${id}`);
         }
         else{
             alert(data.message);

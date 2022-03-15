@@ -21,7 +21,7 @@ const Homepage = () => {
                 <h3 className='homeSubHeading'>Simple<span className="dot">.</span> Fast<span className="dot">.</span> Secure<span className="dot">.</span> </h3>
             </div>
             <div className="row btnRow">
-                <Link to="/Createpoll" className='col-2'><button className="btn btn1">Create a Poll</button></Link>
+                <Link to="/createpoll" className='col-2'><button className="btn btn1">Create a Poll</button></Link>
                 <Link to="/polls" className='col-2'><button className="btn btn2">Ongoing Polls</button></Link>
             </div>
             <div className="row btnRow">

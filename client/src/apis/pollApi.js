@@ -30,7 +30,7 @@ export const getPollInfo = async (poll_id) => {
 }
 
 export const submitPollChoice = async (userChoice) => {
-    const uri = "https://ezserver.herokuapp.com/api/poll/";
+    const uri = "https://ezserver.herokuapp.com/api/poll/choice";
     try{
         const {data} = await axios.post(uri, userChoice);
         return data;
