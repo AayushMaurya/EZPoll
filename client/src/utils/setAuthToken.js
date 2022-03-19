@@ -3,7 +3,7 @@ import axios from "axios"
 const setAuthToken = (token) => {
     try{
         if(token){
-            axios.defaults.headers.common['Authotization'] = token;
+            axios.defaults.headers.common['Authorization'] = token;
             console.log("default is set to token");
         }
         else{
