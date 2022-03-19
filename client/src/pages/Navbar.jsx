@@ -25,7 +25,7 @@ export default function Navbar() {
         </div>
         <div>
           {store.client.isAuthenticated ? <Link to="/client"><FontAwesomeIcon icon={faUser} size='2x' /></Link>:
-          <div class="d-flex justify-content-end signBox"><Link to="/clientLogin" className='signLink mx-3'><div className="text-dark">Signin</div></Link>
+          <div class="d-flex justify-content-end signBox"><Link to="/clientLogin" className='signLink mx-3'><div className="text-dark">Login</div></Link>
           <Link to="/clientSignup" className='signLink signUpLink mx-3'><div className="">Signup</div></Link></div>}
           {/* <div class="signLink mx-3">Signin</div>
           <div class="signLink signUpLink mx-3">Signup</div> */}

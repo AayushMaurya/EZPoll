@@ -4,72 +4,134 @@ import decodeToken from "../../utils/decodeToken";
 import { useNavigate } from "react-router-dom";
 import { addNewClient, checkClientLoginData } from "../../apis/clientApi";
 import { setClient } from "../../redux/actions/clientAction";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import './clientCss.css';
 
 const ClientSignup = () => {
-    const [signupInfo, setSignupInfo] = useState({
-        name: "",
-        email: "",
-        dob: "",
-        contactNumber: ""
+  const [signupInfo, setSignupInfo] = useState({
+    name: "",
+    email: "",
+    dob: "",
+    contactNumber: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const store = useSelector((store) => store);
+
+  // if client logged in then navigate to clientHome
+  useEffect(() => {
+    if (store.client.isAuthenticated) {
+      navigate("/client");
+    }
+  }, [store.client.isAuthenticated]);
+
+  const changeHandler = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setSignupInfo({
+      ...signupInfo,
+      [name]: value,
     });
-    const [isLoading, setIsLoading] = useState(false);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const store= useSelector((store) => store);
+  };
 
-    // if client logged in then navigate to clientHome
-    useEffect(() => {
-        if(store.client.isAuthenticated){
-            navigate('/client');
-        }      
-    }, [store.client.isAuthenticated]);
+  const formHandler = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-    const changeHandler = (e) => {
-        let name = e.target.name;
-        let value = e.target.value;
+    const data = await addNewClient(signupInfo);
+    if (data.success) {
+      console.log("client can be added");
+      alert(data.message);
+      console.log(data);
 
-        setSignupInfo({
-            ...signupInfo,
-            [name]: value
-        });
+      const token = await checkClientLoginData({
+        registrationNumber: data.response.registrationNumber,
+        password: data.response.dob,
+      });
+      if (token) {
+        const clientCridentials = decodeToken(token);
+        dispatch(setClient(clientCridentials));
+      } else {
+        setIsLoading(false);
+        alert("login info is wrong");
+      }
+    } else {
+      console.log(data.message);
+      alert(data.message);
+      setIsLoading(false);
     }
+  };
 
-    const formHandler = async (e) => {
-        e.preventDefault();
-        setIsLoading(true);
+  return (
+    <>
+      <div className="container loginForm">
+        <div className="row formBody">
+          <div className="row">
+            <h3 className="clientLoginTitle">Client Signup</h3>
+          </div>
 
-        const data = await addNewClient(signupInfo);
-        if(data.success)
-        {
-            console.log("client can be added");
-            alert(data.message);
-            console.log(data);
-
-            const token = await checkClientLoginData({registrationNumber: data.response.registrationNumber,
-                password: data.response.dob});
-            if(token)
-            {
-                const clientCridentials = decodeToken(token);
-                dispatch(setClient(clientCridentials));
-            }
-            else{
-                setIsLoading(false)
-                alert("login info is wrong");
-            }
-        }
-        else{
-            console.log(data.message);
-            alert(data.message);
-            setIsLoading(false);
-        }
-
-    }
-
-    return (
-        <>
-        <h1>This is client signup page</h1>
-            <form onSubmit={formHandler}>
+          <form onSubmit={formHandler}>
+            <input
+              type="text"
+              name="name"
+              className="inp"
+              required
+              value={signupInfo.name}
+              onChange={changeHandler}
+              placeholder="Name"
+            />
+            <br />
+            <input
+              type="email"
+              name="email"
+              className="inp"
+              required
+              value={signupInfo.email}
+              onChange={changeHandler}
+              placeholder="Email"
+            />
+            <br />
+            <input
+              type="text"
+              name="dob"
+              className="inp"
+              required
+              value={signupInfo.dob}
+              onChange={changeHandler}
+              placeholder="Date Of Birth"
+            />
+            <br />
+            <input
+              type="tel"
+              name="contactNumber"
+              className="inp"
+              required
+              value={signupInfo.contactNumber}
+              onChange={changeHandler}
+              placeholder="Contact No."
+            />
+            <br />
+            <div className="row">
+              {!isLoading && (
+                <button type="submit" className="btn signupBtn">
+                  Signup
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
+        <div className="row">
+          <div className="dont">
+            Already have an account{" "}
+            <Link to="/clientLogin" className="donts">
+              LogIn
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/* <form onSubmit={formHandler}>
                 <label>Name: </label>
                 <input type="text" name="name" required value={signupInfo.name} onChange={changeHandler} />
                 <br />
@@ -84,9 +146,9 @@ const ClientSignup = () => {
                 <br />
                 {!isLoading && <button type="submit">SignUp</button>}
             </form>
-            <div>Already have an account <Link to="/clientLogin" >LogIn</Link></div>
-        </>
-    );
-}
+            <div>Already have an account <Link to="/clientLogin" >LogIn</Link></div> */}
+    </>
+  );
+};
 
 export default ClientSignup;
