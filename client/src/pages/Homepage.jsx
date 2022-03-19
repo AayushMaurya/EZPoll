@@ -17,7 +17,7 @@ const Homepage = () => {
 
         <div className="container my-5">
             <div className="row flex-column homeContent">
-                <h2 className='homeHeading'>Create your Own <span className='spanName'>EZPoll</span> within Seconds </h2>
+                <h2 className='homeHeading'>Create your Own <span className='spanName'>EZPollGaurav</span> within Seconds </h2>
                 <h3 className='homeSubHeading'>Simple<span className="dot">.</span> Fast<span className="dot">.</span> Secure<span className="dot">.</span> </h3>
             </div>
             <div className="row btnRow">
