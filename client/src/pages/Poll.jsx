@@ -24,6 +24,7 @@ const Poll = () => {
             setIsPoll(true);
             setUserChoice({
                 ...userChoice,
+                poll_id: id,
                 _id: pollinfo._id
             });
         }
@@ -47,8 +48,6 @@ const Poll = () => {
         e.preventDefault();
         setLoadingSubmit(true);
 
-        
-
         console.log("pollinfo: ", pollinfo);
         console.log("usechoice: ", userChoice);
 
@@ -61,6 +60,9 @@ const Poll = () => {
         else{
             alert(data.message);
             setLoadingSubmit(false);
+            if(data.message == "Already voted")
+                navigate(`/pollResult/${id}`);
+            
         }
     }
 
