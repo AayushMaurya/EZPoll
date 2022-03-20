@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/EZPoll/static/css/main.47b201f0.css",
-    "main.js": "/EZPoll/static/js/main.02452af8.js",
+    "main.js": "/EZPoll/static/js/main.9ea60d3a.js",
     "static/media/bg.png": "/EZPoll/static/media/bg.b61e3b4b3cee1783cfaa.png",
     "index.html": "/EZPoll/index.html",
     "main.47b201f0.css.map": "/EZPoll/static/css/main.47b201f0.css.map",
-    "main.02452af8.js.map": "/EZPoll/static/js/main.02452af8.js.map"
+    "main.9ea60d3a.js.map": "/EZPoll/static/js/main.9ea60d3a.js.map"
   },
   "entrypoints": [
     "static/css/main.47b201f0.css",
-    "static/js/main.02452af8.js"
+    "static/js/main.9ea60d3a.js"
   ]
 }
