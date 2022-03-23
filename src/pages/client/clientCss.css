@@ -28,6 +28,40 @@
     margin-bottom: 20px;
 }
 
+.clientDetails{
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+.clientDetails::after{
+    background-color: transparent;
+}
+
+.clientName{
+    font-size: 20;    
+    font-weight: 600;
+}
+.clientEmail{
+    font-size: 15;    
+    color: lightslategray;
+    margin-bottom: 40px;
+    margin-top: -10px;
+}
+.clientId{
+    font-size: 20;
+    color: #7255e8;    
+}
+.clientId:hover{
+    transform: scale(1.05);
+}
+.homeLink{
+    text-decoration: none;
+}
+.clientLink{
+    text-decoration: none;
+}
+
 .inp{
     margin: auto;
     margin-top: 10px;
@@ -47,6 +81,7 @@
     font-weight: 400;
     color: white;
     border: 3px solid #9dcff6;
+    border-radius: 5px;
     padding: 5px;
 }
 

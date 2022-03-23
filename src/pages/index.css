@@ -59,7 +59,12 @@
 .signLink:hover:after {
   transform: scaleX(1.1);
 }
-
+.dropdown-toggle::after {
+  display: none !important; 
+}
+.dropBtn:hover{
+  background-color: transparent;
+}
 .homeContent {
   /* background-color: blue; */
   display: flex;

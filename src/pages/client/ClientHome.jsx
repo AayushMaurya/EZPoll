@@ -13,7 +13,6 @@ const ClientHome = () => {
     dispatch(clientLogout());
     navigate("/");
   };
-
   return (
     <>
       {store.client.isAuthenticated ? (
@@ -24,11 +23,6 @@ const ClientHome = () => {
             </div>
 
             <div className="row">
-              {/* <img
-                className="card-img-top"
-                src={store.client.client.avatar}
-                alt="Card image cap"
-              /> */}
               <table className="table">
                 <tbody>
                   <tr>
