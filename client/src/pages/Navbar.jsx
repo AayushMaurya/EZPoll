@@ -19,8 +19,10 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {/* <Link to="/create" className='navLinks'><li className="nav-link text-dark">Create a Poll</li></Link> */}
-            <Link to="./#howa" className='navLinks'><li className="nav-link text-dark">How it Works</li></Link>
-            <Link to="/about" className='navLinks'><li className="nav-link text-dark">About Us</li></Link>
+            <Link to="/CreatePoll" className='navLinks'><li className="nav-link text-dark">Create Poll</li></Link>
+            <Link to="/" className='navLinks'><li className="nav-link text-dark">Voting Section</li></Link>
+            <Link to="/Polls" className='navLinks'><li className="nav-link text-dark">Ongoing Polls</li></Link>
+            <Link to="./how" className='navLinks'><li className="nav-link text-dark">How it Works</li></Link>
           </ul>
         </div>
         <div>

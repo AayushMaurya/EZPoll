@@ -145,3 +145,52 @@
   text-align: center;
 } */
 
+/* How  */
+.how{
+  text-align: center;
+}
+.howTitle{
+  font-size: 25px;
+  font-weight: 800;
+  color: #68e5b2;
+  margin-bottom: 10px;
+}
+.howSubtitle{
+  font-size: 45px;
+  font-weight: 800;
+  /* color: #68e5b2; */
+  margin-bottom: 20px;
+}
+.howExp{
+  font-weight: 500;
+  color: lightslategray;
+  margin-bottom: 60px;
+}
+
+.spanEZ{
+  font-weight: 600; 
+  color: #f56f77;
+}
+.howStep{
+  padding: 10px;
+  border: 3px solid #68e5b2;
+  margin: 20px;
+  border-radius: 20px;
+}
+.howStep:hover{
+  transform: scale(1.06);
+}
+.step{
+  color: #7255e8;
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.stepTitle{
+  color: rgb(92, 92, 92);
+  font-weight: 600;
+}
+.stepDes{
+  font-size: 25px;
+  color: lightslategray;
+}

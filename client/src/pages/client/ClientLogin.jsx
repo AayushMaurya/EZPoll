@@ -20,7 +20,7 @@ const ClientLogin = () => {
 
   useEffect(() => {
     if (store.client.isAuthenticated) {
-      navigate("/client");
+      navigate("/");
     }
   }, [store.client.isAuthenticated]);
 
