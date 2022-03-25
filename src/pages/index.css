@@ -266,19 +266,19 @@
 }
 
 /* poll section */
+.pollSecCen{
+  margin: auto;
+}
 .pollSec{
-  background-color: #9dcff6;
+  background-color: #d3ffed;
   border: 0px;
   border-radius: 10px;
   width: 50%;
-  margin-top: 30px;
-  padding: 10px;
-}
-.pollHeader{
-  text-align: center;
+  margin-top: 40px;
+  padding: 30px;
 }
 .pollFooter{
-  margin: auto;
+  /* margin: auto; */
   margin-top: 20px;
   /* background-color: #7255e8; */
   width: 50%;
@@ -299,11 +299,123 @@
 
 }
 .pollsubbtn{
-  text-align: center;
-  margin: auto;
+  /* text-align: center; */
+  /* margin: auto; */
+  margin-left: 2px;
+  margin-top: 5px;
 }
 .pollsubmitBtn{
-  width: 25%;
-  margin: auto;
+  /* width: 25%; */
+  /* margin: auto; */
+  margin-top: 5px;
+  font-size: 18px;
+  border-radius: 5px;
+}
 
+.shareSec{
+  background-color: #e3dff5;
+  border: 0px;
+  border-radius: 10px;
+  width: 50%;
+  margin-top: 40px;
+  padding: 20px;
+}
+
+.shTitle{
+  font-size: 20px;
+  color: #3f2c8a;
+  margin-bottom: 15px;
+}
+
+.shLink{
+  font-size: 18px;
+}
+
+/* created Poll */
+
+.cr{
+  margin: auto;
+}
+
+.created{
+  background-color: #d3ffed;
+  width: 60%;
+  margin: auto;
+  border: 0px solid #68e5b2;
+  border-radius: 15px;
+  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.createdTitle{
+  font-size: 25px;
+}
+.crH{
+  margin: auto;
+  text-align: center;
+}
+.createdDes{
+  font-size: 20px;
+  color: gray;
+}
+
+.createdChoices{
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.createdFooter{
+  margin-top: 20px;
+}
+.createdHeader{
+  margin-bottom: 10px;
+}
+.crL{
+  border-radius: 5px;
+}
+
+.creatdC{
+  font-size: 20px;
+}
+
+.createdL{
+  font-size: 15px;
+}
+.createdLink{
+  font-size: 18px;
+}
+.copyBtn{
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.ongoingPoll{
+  margin-top: 30px;
+  width: 50%;
+}
+.ongoingHeader{
+  margin-bottom: 10px;
+}
+.ongoingTitle{
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.ongoingInp{
+  width: 90%;
+  font-size: 20px;
+  padding: 5px;
+  padding-left: 10px;
+  border-radius: 10px;
+  border: 2px solid gray;
+}
+.findBtn{
+  width: 40%;
+  font-size: 22px;
+  padding: 3px;
+  margin: auto;
+  border-radius: 10px;
 }

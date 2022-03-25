@@ -7,6 +7,7 @@ export const createPoll = async (pollInfo) => {
         return data;
     }
     catch (err) {
+        console.log(err);
         return {
             success: false,
             message: "Poll cannot be created"
@@ -31,8 +32,8 @@ export const getPollInfo = async (poll_id) => {
 
 export const submitPollChoice = async (userChoice) => {
     const uri = "https://ezserver.herokuapp.com/api/poll/choice";
-    try{
-        const {data} = await axios.post(uri, userChoice);
+    try {
+        const { data } = await axios.post(uri, userChoice);
         return data;
     }
     catch (err) {

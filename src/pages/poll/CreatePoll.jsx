@@ -51,7 +51,7 @@ const CreatePoll = () => {
 
   return (
     <>
-      {!isCreated && (
+      {!isCreated && (                    
         <div>
           <div className="container createForm">
             <div className="row formHead">
@@ -74,7 +74,6 @@ const CreatePoll = () => {
                   required
                   value={pollinfo.title}
                   onChange={changeHandler}
-                  
                 />
                 <br />
                 <h4 className="formEle">Description</h4>
@@ -94,7 +93,7 @@ const CreatePoll = () => {
                   required
                   value={pollinfo.choice1}
                   onChange={changeHandler}
-                  placeholder = "Option 1 "
+                  placeholder="Option 1 "
                 />
                 <input
                   type="text"
@@ -103,7 +102,7 @@ const CreatePoll = () => {
                   required
                   value={pollinfo.choice2}
                   onChange={changeHandler}
-                  placeholder = "Option 2 "
+                  placeholder="Option 2 "
                 />
                 <input
                   type="text"
@@ -112,49 +111,56 @@ const CreatePoll = () => {
                   required
                   value={pollinfo.choice3}
                   onChange={changeHandler}
-                  placeholder = "Option 3 "
+                  placeholder="Option 3 "
                 />
                 <div className="row crBtn">
-                    
-                {!isLoading && <button type="submit" className="createbtn">Create</button>}
+                  {!isLoading && (
+                    <button type="submit" className="createbtn">
+                      Create
+                    </button>
+                  )}
                 </div>
               </form>
             </div>
           </div>
         </div>
       )}
+
       {isCreated && (
-        <div>
-          <h1>Your poll is successfull created</h1>
-          <div>
-            <table className="table border">
-              <tbody>
-                <tr>
-                  <td>Title</td>
-                  <td>{pollinfo.title}</td>
-                </tr>
-                <tr>
-                  <td>Desc</td>
-                  <td>{pollinfo.description}</td>
-                </tr>
-                <tr>
-                  <td>choice1</td>
-                  <td>{pollinfo.choice1}</td>
-                </tr>
-                <tr>
-                  <td>choice2</td>
-                  <td>{pollinfo.choice2}</td>
-                </tr>
-                <tr>
-                  <td>choice3</td>
-                  <td>{pollinfo.choice3}</td>
-                </tr>
-                <tr>
-                  <td>share</td>
-                  <td>http://localhost:3000/poll/{poll_id}</td>
-                </tr>
-              </tbody>
-            </table>
+        <div className="container cr">
+          <div className="row my-3 crH">
+            <h2>Your poll is successfully created</h2>
+          </div>
+          <div className="row created">
+            <div className="row createdHeader">
+              <h4 className="createdTitle">{pollinfo.title}</h4>
+              <h4 className="createdDes">{pollinfo.description}</h4>
+            </div>
+            <div className="row">
+              <h4 className="createdChoices">Choices</h4>
+            </div>
+            <div className="row">
+              <h4 className="creatdC">{pollinfo.choice1}</h4>
+            </div>
+            <div className="row">
+              <h4 className="creatdC">{pollinfo.choice2}</h4>
+            </div>
+            <div className="row">
+              <h4 className="creatdC">{pollinfo.choice3}</h4>
+            </div>
+            <div className="row createdFooter">
+              <h4 className="createdL">Poll Link</h4>
+              <div className="row crL">
+                <div className="col">
+                  <h4 className="createdLink">
+                    http://localhost:3000/poll/{poll_id}
+                  </h4>
+                </div>
+                <div className="col">
+                  <button className="btn2 copyBtn">Copy</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -163,3 +169,4 @@ const CreatePoll = () => {
 };
 
 export default CreatePoll;
+

@@ -15,9 +15,19 @@ const OngoingPolls = () => {
 
     return (
         <>
-            <h1>All ongoing polls</h1>
-            <input type="text" value={poll_id} onChange={changeHandler} />
-            <button onClick={findPoll}>Find</button>
+        <div className="container ongoingPoll">
+            <div className="row ongoingHeader">
+                <h2 className="ongoingTitle">Find the latest ongoing polls. </h2>
+            </div>
+            <div className="row ">
+                <div className="col">
+                    <input type="text" value={poll_id} onChange={changeHandler} placeholder = "Enter Poll ID" className="ongoingInp"/>
+                </div>
+                <div className="col">
+                    <button onClick={findPoll}  className = "findBtn btn2">Find</button>
+                </div>
+            </div>
+        </div>
         </>
     );
 }

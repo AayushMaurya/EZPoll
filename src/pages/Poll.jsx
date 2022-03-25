@@ -42,7 +42,9 @@ const Poll = () => {
       [name]: value,
     });
   };
-
+const copyToClipboard = e => {
+  navigator.clipboard.writeText(window.location.toString())
+}
   const formHandler = async (e) => {
     e.preventDefault();
     setLoadingSubmit(true);
@@ -75,40 +77,76 @@ const Poll = () => {
               <h3 className="pollChoices">Choices </h3>
               <form onSubmit={formHandler}>
                 <div className="row">
-                  <input
-                    type="radio"
-                    name="choice"
-                    value="choice1"
-                    id="choice1"
-                    className="choice"
-                    onChange={changeHandler}
-                    />
-                    <label for = "choice1">{pollinfo.choice1}</label> <br />
-                  <input
-                    type="radio"
-                    name="choice"
-                    value="choice2"
-                    id="choice2"
-                    className="choice"
-                    onChange={changeHandler}
-                    />
-                    <label for = "choice2">{pollinfo.choice2}</label> <br />
-                  <input
-                    type="radio"
-                    name="choice"
-                    value="choice3"
-                    id="choice3"
-                    className="choice"
-                    onChange={changeHandler}
-                    />
-                    <label for = "choice3">{pollinfo.choice3}</label> <br />
+                  <div className="row">
+                    <div className="col-1">
+                      <input
+                        type="radio"
+                        name="choice"
+                        value="choice1"
+                        id="choice1"
+                        className="choice"
+                        onChange={changeHandler}
+                      />
+                    </div>
+                    <div className="col">
+                      <label for="choice1">{pollinfo.choice1}</label>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-1">
+                      <input
+                        type="radio"
+                        name="choice"
+                        value="choice2"
+                        id="choice2"
+                        className="choice"
+                        onChange={changeHandler}
+                      />
+                    </div>
+                    <div className="col">
+                      <label for="choice2">{pollinfo.choice2}</label>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-1">
+                      <input
+                        type="radio"
+                        name="choice"
+                        value="choice3"
+                        id="choice3"
+                        className="choice"
+                        onChange={changeHandler}
+                      />
+                    </div>
+                    <div className="col">
+                      <label for="choice3">{pollinfo.choice3}</label>
+                    </div>
+                  </div>
                 </div>
                 <div className="row pollsubbtn">
-                  {!loadinSubmit && <button type="submit" className="pollsubmitBtn">Submit</button>}
+                  {!loadinSubmit && (
+                    <button type="submit" className=" btn2 pollsubmitBtn">
+                      Vote
+                    </button>
+                  )}
                 </div>
               </form>
             </div>
           </div>
+          <div className="container shareSec">
+              <div className="row">
+                  <h4 className="shTitle">Share this Poll with your friends</h4>
+              </div>
+              <div className="row">
+                  <div className="col">
+                    <h4 className="shLink">Link to POLL</h4>
+                  </div>
+                  <div className="col-2">
+                    <button className="btn2 copyBtn">Copy</button>
+                  </div>
+              </div>
+          </div>
+          
         </div>
       )}
     </>
