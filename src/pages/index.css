@@ -199,3 +199,111 @@
   font-size: 25px;
   color: lightslategray;
 }
+
+/* create Poll */
+
+.createForm{
+  margin-top: 30px;
+  /* background-color: #68e5b2; */
+  width: 50%;
+}
+
+.formHead{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.crTitle{
+  font-size: 40px;
+}
+
+.crSubtitle{
+  font-size: 20px;
+  color: gray;
+}
+
+.crForm{
+  background-color: #e3dff5;
+  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /* border: 2px solid #7255e8; */
+  border-radius: 10px;
+  /* border-bottom: 5px solid #7255e8; */
+}
+.formEle{
+  font-size: 20px;
+  color: #3f2c8a;
+  font-weight: 600;
+}
+.formInp{
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  padding: 5px;
+  padding-left: 15px;
+}
+.crBtn{
+  text-align: center;
+  margin-top: 20px;
+}
+.createbtn{
+  width: 20%;
+  margin: auto;
+  border: 3px solid #7255e8;
+  background-color: #7255e8;
+  border-radius: 5px;
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+}
+.createbtn:hover{
+  background-color: white;
+  color: #7255e8;
+}
+
+/* poll section */
+.pollSec{
+  background-color: #9dcff6;
+  border: 0px;
+  border-radius: 10px;
+  width: 50%;
+  margin-top: 30px;
+  padding: 10px;
+}
+.pollHeader{
+  text-align: center;
+}
+.pollFooter{
+  margin: auto;
+  margin-top: 20px;
+  /* background-color: #7255e8; */
+  width: 50%;
+}
+
+.pollTitle{
+  font-size: 30px;
+}
+.pollDes{
+  font-size: 20px;
+  color: gray;
+}
+.pollChoices{
+  font-size: 25px;
+}
+.choice{
+  font-size: 30px;
+
+}
+.pollsubbtn{
+  text-align: center;
+  margin: auto;
+}
+.pollsubmitBtn{
+  width: 25%;
+  margin: auto;
+
+}
