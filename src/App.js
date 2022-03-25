@@ -22,6 +22,7 @@ import About from "./pages/About";
 import PollResult from "./pages/poll/PollResult";
 import OngoingPolls from "./pages/poll/OngoingPolls";
 import ClientDashboard from "./pages/client/ClientDashboard";
+import CreateVote from "./pages/vote/CreateVote";
 
 // check for admin
 if (window.localStorage.adminJwtToken) {
@@ -80,6 +81,7 @@ function App() {
           <Route exact path="/pollResult/:id" element = {<PollResult />} />
           <Route exact path="/polls" element = {<OngoingPolls />} />
           <Route exact path="/dash" element = {<ClientDashboard />} />
+          <Route exact path="/createVote" element = {<CreateVote />} />
         </Routes>
       </Router>
     </div>
