@@ -4,7 +4,7 @@ import setAuthToken from "../utils/setAuthToken";
 // this will check the admin login data
 export const checkAdminLoginData = async (loginInfo) => {
     try {
-        const { data } = await axios.post("http://localhost:5000/api/admin/login", loginInfo);
+        const { data } = await axios.post("https://ezserver.herokuapp.com/api/admin/login", loginInfo);
 
         const { token } = data;
 
@@ -21,7 +21,7 @@ export const checkAdminLoginData = async (loginInfo) => {
 
 export const addNewAdmin = async (signupInfo) => {
     try{
-        const { data } = await axios.post("http://localhost:5000/api/admin/addAdmin", signupInfo);
+        const { data } = await axios.post("https://ezserver.herokuapp.com/api/admin/addAdmin", signupInfo);
 
         console.log(data);
         return data;
