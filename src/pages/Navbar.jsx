@@ -41,7 +41,7 @@ export default function Navbar() {
               <Link to="/CreatePoll" className="navLinks">
                 <li className="nav-link text-dark">Create Poll</li>
               </Link>
-              <Link to="/" className="navLinks">
+              <Link to="/CreateVote" className="navLinks">
                 <li className="nav-link text-dark">Voting Section</li>
               </Link>
               <Link to="/Polls" className="navLinks">
