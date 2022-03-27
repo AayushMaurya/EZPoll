@@ -1,23 +1,38 @@
 import React, {useState} from "react";
-import { createVote, addCandidate } from "../../apis/voteApi"
+import { useNavigate } from "react-router-dom";
+import { createVote, addCandidate, addVoters } from "../../apis/voteApi"
 
 const CreateVote = () => {
+    const navigate = useNavigate();
     const [step, setStep] = useState(2);
     const [isLoading, setIsLoading] = useState(false);
     const [voteInfo, setVoteInfo] = useState({
         name: "",
         description: ""
     });
-    const [candidate, setCandidate] = useState({
-        name: "",
-        partyName: "",
-        phone: null,
-        email: "",
-        position: null
-    });
+    const [name, setName] = useState('');
+    const [partyName, setPartyName] = useState('');
+    const [phone, setPhone] = useState(null);
+    const [email, setEmail] = useState('');
+    const [profile, setProfile] = useState(null);
     const [voteId, setVoteId] = useState();
     const [voterList, setVoterList] = useState(null);
-    const [profile, setProfile] = useState(null);
+
+    // handle avatar
+    const imagehandler = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            let img = e.target.files[0]
+            setProfile(img);
+        }
+    }
+
+    // handle voter list
+    const voterListHandler = (e) => {
+        if(e.target.files && e.target.files[0]) {
+            let xml = e.target.files[0];
+            setVoterList(xml);
+        }
+    }
 
     // handle vote info
     const changeHandler1 = (e) =>{
@@ -30,24 +45,7 @@ const CreateVote = () => {
         });
     }
 
-    // handle candidate info
-    const changeHandler2 =(e) =>{
-        let name = e.target.name;
-        let value = e.target.value;
-
-        setCandidate({
-            ...candidate,
-            [name]: value
-        });
-    }
-
-    // handle voters list
-    const changeHandler3 = (e) => {
-        setVoterList(e.target.value);
-    }
-
-
-    // this will create a vote position in database
+    // submit vote details
     const formHandler1 = async (e) =>{
         e.preventDefault();
         setIsLoading(true);
@@ -57,10 +55,6 @@ const CreateVote = () => {
         if(data.success){
             console.log("voteId:", data.response._id);
             setVoteId(data.response._id);
-            setCandidate({
-                ...candidate,
-                position: voteId
-            });
             
             alert("vote successfully created");
             setStep(2);
@@ -73,23 +67,23 @@ const CreateVote = () => {
         }
     }
 
-    // this will add candidate info 
+    // submit candidate details 
     const formHandler2 = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        console.log(candidate);
 
-        let formData = new FormData();
-        formData.append('candidate', candidate);
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('phone', phone);
+        formData.append('email', email);
+        formData.append('partyName', partyName);
         formData.append('profile', profile);
-        console.log("formata: ", formData);
 
-        var data = await addCandidate(formData);
-
+        const data = await addCandidate(formData);
         if(data.success)
         {
+            console.log("success:", data);
             setIsLoading(false);
-            alert(data.message);
         }
         else{
             alert(data.message);
@@ -97,12 +91,25 @@ const CreateVote = () => {
         }
     }
 
-    const handleProfile = (e) => {
-        console.log(e.target.files[0]);
+    // submit voter list
+    const formHandler3 = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
 
-        let file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('excel', voterList);
 
-        setProfile(file);
+        const data = await addVoters(formData);
+        if(data.success)
+        {
+            setIsLoading(false);
+            navigate('/');
+        }
+        else
+        {
+            alert(data.message);
+            setIsLoading(false);
+        }
     }
 
     const next = () =>{
@@ -130,19 +137,19 @@ const CreateVote = () => {
                 <h2>insert details of candidates</h2>
                 <form onSubmit={formHandler2}>
                     <lable>Name: </lable>
-                    <input type="text" name="name" value={candidate.name} onChange={changeHandler2} required />
+                    <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
                     <br />
                     <lable>Party Name:  </lable>
-                    <input type="text" name="partyName" value={candidate.partyName} onChange={changeHandler2} required />
+                    <input type="text" name="partyName" value={partyName} onChange={(e) => setPartyName(e.target.value)} required />
                     <br />
                     <lable>Phone:  </lable>
-                    <input type="tel" name="phone" value={candidate.phone} onChange={changeHandler2} required />
+                    <input type="tel" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} required />
                     <br />
                     <lable>Email:  </lable>
-                    <input type="email" name="email" value={candidate.email} onChange={changeHandler2} required />
+                    <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     <br />
                     <lable>Avatar:  </lable>
-                    <input type="file" name="profile" onChange={handleProfile} required />
+                    <input required type="file" accept=".jpg,.png,.jpeg" onChange={imagehandler} />
                     <br />
                     {!isLoading && <button type="submit">Add</button>}
                 </form>
@@ -151,8 +158,9 @@ const CreateVote = () => {
             </div>}
             {step===3 && <div>
                 <h2>insert voters list</h2>
-                <form>
-                    <input type="file" required name="voterList" value={voterList} onChange={changeHandler3} />
+                <form onSubmit={formHandler3}>
+                    <input type="file" required name="voterList" onChange={voterListHandler} />
+                    <button type="submit">submit</button>
                 </form>
                 <button onClick={back}>back</button>
             </div>}

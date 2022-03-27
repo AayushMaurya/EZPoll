@@ -32,3 +32,20 @@ export const addCandidate = async (candidate) =>{
     }
 }
 
+// api request to add voter list
+export const addVoters = async (voterList) => {
+    try{
+        console.log("sending voter list: ", voterList);
+        const { data } = await axios.post("https://ezserver.herokuapp.com/api/client/addVoter", voterList);
+        console.log("received data: ", data);
+        return (data);
+    }
+    catch(err){
+        console.log(err);
+        return {
+            success: false,
+            message: "cannot add voter list at this moment"
+        }
+    }
+}
+
