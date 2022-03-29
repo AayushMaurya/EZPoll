@@ -4,7 +4,7 @@ import { createVote, addCandidate, addVoters } from "../../apis/voteApi"
 
 const CreateVote = () => {
     const navigate = useNavigate();
-    const [step, setStep] = useState(2);
+    const [step, setStep] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const [voteInfo, setVoteInfo] = useState({
         name: "",
@@ -54,7 +54,7 @@ const CreateVote = () => {
         var data = await createVote(voteInfo);
         if(data.success){
             console.log("voteId:", data.response._id);
-            setVoteId(data.response._id);
+            setVoteId(data.response.position_id);
             
             alert("vote successfully created");
             setStep(2);
@@ -78,6 +78,7 @@ const CreateVote = () => {
         formData.append('email', email);
         formData.append('partyName', partyName);
         formData.append('profile', profile);
+        formData.append('position_id', voteId);
 
         const data = await addCandidate(formData);
         if(data.success)
