@@ -25,20 +25,19 @@ import OngoingPolls from "./pages/poll/OngoingPolls";
 import ClientDashboard from "./pages/client/ClientDashboard";
 import CreateVote from "./pages/vote/CreateVote";
 import VoterLogin from "./pages/voter/VoterLogin";
-import VoterHome  from "./pages/voter/VoterHome";
+import VoterHome from "./pages/voter/VoterHome";
 
 // check for voter
-if(window.localStorage.voterJwtToken)
-{
+if (window.localStorage.voterJwtToken) {
   console.log("Voter already logedin");
   const decode = decodeToken(localStorage.voterJwtToken);
   const currentTime = Date.now() / 1000;
 
-  if(decode.exp < currentTime) {
+  if (decode.exp < currentTime) {
     store.dispatch(voterLogout());
     window.location.href = '/';
   }
-  else{
+  else {
     setAuthToken(localStorage.voterJwtToken);
     store.dispatch(setVoter(decode));
   }
@@ -49,7 +48,7 @@ if (window.localStorage.adminJwtToken) {
   console.log("admin is already logged in");
   const decode = decodeToken(localStorage.adminJwtToken);
   const currentTime = Date.now() / 1000;
-  
+
   if (decode.exp < currentTime) {
     store.dispatch(adminLogout());
     window.location.href = '/';
@@ -61,8 +60,7 @@ if (window.localStorage.adminJwtToken) {
 }
 
 // check for client
-else if(window.localStorage.clientJwtToken)
-{
+else if (window.localStorage.clientJwtToken) {
   console.log("client is already logged in")
 
   const decode = decodeToken(localStorage.clientJwtToken);
@@ -84,7 +82,7 @@ function App() {
   return (
     <div>
       <Router>
-      <Navbar />
+        <Navbar />
         <Routes>
           <Route exact path='/' element={<Homepage />} />
           <Route exact path='/adminLogin' element={<AdminLogin />} />
@@ -96,13 +94,13 @@ function App() {
           <Route exact path='/how' element={<How />} />
           <Route exact path='/about' element={<About />} />
           <Route exact path='/createPoll' element={<CreatePoll />} />
-          <Route exact path="/poll/:id" element = {<Poll />} />
-          <Route exact path="/pollResult/:id" element = {<PollResult />} />
-          <Route exact path="/polls" element = {<OngoingPolls />} />
-          <Route exact path="/dash" element = {<ClientDashboard />} />
-          <Route exact path="/createVote" element = {<CreateVote />} />
-          <Route exact path="/voterLogin" element = {<VoterLogin />} />
-          <Route exact path="/voterHome" element = {<VoterHome />} />
+          <Route exact path="/poll/:id" element={<Poll />} />
+          <Route exact path="/pollResult/:id" element={<PollResult />} />
+          <Route exact path="/polls" element={<OngoingPolls />} />
+          <Route exact path="/dash" element={<ClientDashboard />} />
+          <Route exact path="/createVote" element={<CreateVote />} />
+          <Route exact path="/voterLogin" element={<VoterLogin />} />
+          <Route exact path="/voterHome" element={<VoterHome />} />
         </Routes>
       </Router>
     </div>

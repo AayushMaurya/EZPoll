@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { checkVoterLoginData } from "../../apis/voterApi"
-import { useNavigate} from "react-router";
-import { useDispatch, useSelector  } from "react-redux";
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import { setVoter } from "../../redux/actions/voterAction";
 import store from "../../redux/store";
 import decodeToken from "../../utils/decodeToken";
@@ -17,14 +17,14 @@ const VoterLogin = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(store.voter.isAuthenticated) {
+        if (store.voter.isAuthenticated) {
             navigate("/voterHome")
         }
     });
 
     const changeHandler = (e) => {
-        let name=e.target.name;
-        let value=e.target.value;
+        let name = e.target.name;
+        let value = e.target.value;
 
         setVoterLoginInfo({
             ...voterLoginInfo,
@@ -32,20 +32,19 @@ const VoterLogin = () => {
         });
     }
 
-    const formHandler = async (e) =>{
+    const formHandler = async (e) => {
         e.preventDefault();
         setIsLoading(true);
 
         console.log("login info: ", voterLoginInfo);
 
         const data = await checkVoterLoginData(voterLoginInfo);
-        if(data.success)
-        {
+        if (data.success) {
             const voterCridentials = decodeToken(data.token);
             alert("loged in");
             dispatch(setVoter(voterCridentials));
-        }   
-        else{
+        }
+        else {
             alert(data.message);
             setIsLoading(false);
         }
@@ -53,15 +52,15 @@ const VoterLogin = () => {
 
     return (
         <>
-           <form onSubmit={formHandler}>
-               <lable>Username: </lable>
-               <input type="text" name="username" value={voterLoginInfo.username} onChange={changeHandler} required />
-               <br />
-               <lable>Password: </lable>
-               <input type="text" name="password" value={voterLoginInfo.password} onChange={changeHandler} required />
-               <br />
-               {!isLoading && <button type="submit">login</button>}
-           </form>
+            <form onSubmit={formHandler}>
+                <lable>Username: </lable>
+                <input type="text" name="username" value={voterLoginInfo.username} onChange={changeHandler} required />
+                <br />
+                <lable>Password: </lable>
+                <input type="text" name="password" value={voterLoginInfo.password} onChange={changeHandler} required />
+                <br />
+                {!isLoading && <button type="submit">login</button>}
+            </form>
         </>
     )
 }

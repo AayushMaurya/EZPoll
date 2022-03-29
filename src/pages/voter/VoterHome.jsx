@@ -3,19 +3,19 @@ import { voterLogout } from "../../redux/actions/voterAction";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const VoterHome = () =>{
+const VoterHome = () => {
 
     const store = useSelector((store) => store);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(!store.voter.isAuthenticated) {
+        if (!store.voter.isAuthenticated) {
             navigate("/voterLogin")
         }
     })
 
-    const logoutHandler = (e) =>{
+    const logoutHandler = (e) => {
         dispatch(voterLogout());
         navigate("/");
     }

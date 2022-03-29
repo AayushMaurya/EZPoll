@@ -4,10 +4,9 @@ const initialState = {
 }
 
 const voterReducer = (state = initialState, action) => {
-    switch(action.type)
-    {
+    switch (action.type) {
         case "SET_VOTER":
-            return{
+            return {
                 ...state,
                 isAuthenticated: true,
                 client: action.payload
@@ -19,7 +18,7 @@ const voterReducer = (state = initialState, action) => {
                 voter: action.payload
             }
         default:
-                return state;
+            return state;
     }
 }
 

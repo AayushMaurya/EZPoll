@@ -1,17 +1,17 @@
 import setAuthToken from "../../utils/setAuthToken";
 
 export const setVoter = (voterCridentials) => {
-    return{
+    return {
         type: "SET_VOTER",
         payload: voterCridentials
     }
 }
 
-export const voterLogout = () =>{
+export const voterLogout = () => {
     localStorage.removeItem('voterJwtToken');
     setAuthToken(false);
 
-    return{
+    return {
         type: "VOTER_LOGOUT",
         payload: {}
     }

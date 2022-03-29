@@ -19,7 +19,7 @@ const ClientHome = () => {
         <div className="container loginForm">
           <div className="row formBody">
             <div className="row">
-            <h3 className="clientLoginTitle">Client Info</h3>
+              <h3 className="clientLoginTitle">Client Info</h3>
             </div>
 
             <div className="row">
