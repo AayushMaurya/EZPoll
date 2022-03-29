@@ -7,6 +7,7 @@ import decodeToken from "./utils/decodeToken";
 import { useSelector } from "react-redux";
 import { setAdmin, adminLogout } from "./redux/actions/adminAction";
 import { setClient, clientLogout } from "./redux/actions/clientAction";
+import { setVoter, voterLogout } from "./redux/actions/voterAction";
 import store from "./redux/store";
 import Poll from "./pages/Poll";
 import AdminSignup from "./pages/admin/AdminSignup";
@@ -24,6 +25,24 @@ import OngoingPolls from "./pages/poll/OngoingPolls";
 import ClientDashboard from "./pages/client/ClientDashboard";
 import CreateVote from "./pages/vote/CreateVote";
 import VoterLogin from "./pages/voter/VoterLogin";
+import VoterHome  from "./pages/voter/VoterHome";
+
+// check for voter
+if(window.localStorage.voterJwtToken)
+{
+  console.log("Voter already logedin");
+  const decode = decodeToken(localStorage.voterJwtToken);
+  const currentTime = Date.now() / 1000;
+
+  if(decode.exp < currentTime) {
+    store.dispatch(voterLogout());
+    window.location.href = '/';
+  }
+  else{
+    setAuthToken(localStorage.voterJwtToken);
+    store.dispatch(setVoter(decode));
+  }
+}
 
 // check for admin
 if (window.localStorage.adminJwtToken) {
@@ -83,6 +102,7 @@ function App() {
           <Route exact path="/dash" element = {<ClientDashboard />} />
           <Route exact path="/createVote" element = {<CreateVote />} />
           <Route exact path="/voterLogin" element = {<VoterLogin />} />
+          <Route exact path="/voterHome" element = {<VoterHome />} />
         </Routes>
       </Router>
     </div>

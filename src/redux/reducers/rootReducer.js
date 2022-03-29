@@ -1,11 +1,13 @@
 import { combineReducers } from "redux";
 
 import adminReducer from "./adminReducer";
-import clientReducer from "./clientReducer"
+import clientReducer from "./clientReducer";
+import voterReducer from "./voterReducer";
 
 const rootReducer = combineReducers({
     admin: adminReducer,
-    client: clientReducer
+    client: clientReducer,
+    voter: voterReducer
 });
 
 export default rootReducer;

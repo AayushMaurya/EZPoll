@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { checkVoterLoginData } from "../../apis/voterApi"
-import { useNavigate } from "react-router";
+import { useNavigate} from "react-router";
+import { useDispatch, useSelector  } from "react-redux";
+import { setVoter } from "../../redux/actions/voterAction";
+import store from "../../redux/store";
+import decodeToken from "../../utils/decodeToken";
 
 const VoterLogin = () => {
     const [voterLoginInfo, setVoterLoginInfo] = useState({
@@ -9,6 +13,14 @@ const VoterLogin = () => {
     });
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const store = useSelector((store) => store);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(store.voter.isAuthenticated) {
+            navigate("/voterHome")
+        }
+    })
 
     const changeHandler = (e) => {
         let name=e.target.name;
@@ -20,17 +32,18 @@ const VoterLogin = () => {
         });
     }
 
-    const formHandler = (e) =>{
+    const formHandler = async (e) =>{
         e.preventDefault();
         setIsLoading(true);
 
         console.log("login info: ", voterLoginInfo);
 
-        const data = checkVoterLoginData(voterLoginInfo);
+        const data = await checkVoterLoginData(voterLoginInfo);
         if(data.success)
         {
+            const voterCridentials = decodeToken(data.token);
             alert("loged in");
-            navigate("/");
+            dispatch(setVoter(voterCridentials));
         }   
         else{
             alert(data.message);
