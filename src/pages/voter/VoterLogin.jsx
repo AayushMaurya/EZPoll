@@ -20,7 +20,7 @@ const VoterLogin = () => {
         if(store.voter.isAuthenticated) {
             navigate("/voterHome")
         }
-    })
+    });
 
     const changeHandler = (e) => {
         let name=e.target.name;
