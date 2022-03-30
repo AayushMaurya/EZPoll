@@ -302,7 +302,7 @@ const CreateVote = () => {
             <h4 className="stpD">Insert Voters List</h4>
           </div>
 
-          <form onSubmit={formHandler1}>
+          <form onSubmit={formHandler3}>
             <div className="row">
               <div className="col-6">
                 <input
