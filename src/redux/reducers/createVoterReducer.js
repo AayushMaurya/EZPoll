@@ -1,7 +1,8 @@
 const initialState = {
     isThere: false,
     position: {},
-    candidate: []
+    candidate: [],
+    step: 1
 }
 
 const createVoteReducer = (state = initialState, action) => {
@@ -24,6 +25,12 @@ const createVoteReducer = (state = initialState, action) => {
                 isThere: false,
                 candidate: [],
                 position: {}
+            }
+        case "SET_STEP":
+            return{
+                ...state,
+                isThere: true,
+                step: action.payload
             }
         default:
             return state;

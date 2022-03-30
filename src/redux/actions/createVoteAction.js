@@ -12,6 +12,13 @@ export const setCandidate = (candidateCridentials) => {
     }
 }
 
+export const setstep = (step) => {
+    return{
+        type: "SET_STEP",
+        payload: step
+    }
+}
+
 export const cleanVote = () => {
     return {
         type: "CLEAN",

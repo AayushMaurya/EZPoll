@@ -1,6 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { createVote, addCandidate, addVoters } from "../../apis/voteApi"
+import { useDispatch, useSelector } from "react-redux";
+import { setPosition, setstep } from "../../redux/actions/createVoteAction";
 
 const CreateVote = () => {
     const navigate = useNavigate();
@@ -17,6 +19,17 @@ const CreateVote = () => {
     const [profile, setProfile] = useState(null);
     const [voteId, setVoteId] = useState();
     const [voterList, setVoterList] = useState(null);
+    const dispatch = useDispatch();
+    const store = useSelector((store) => store);
+
+    // check if there is already a vote
+    useEffect(() => {
+        if(store.createVote.isThere)
+        {
+            setStep(store.createVote.step);
+            setVoteInfo(store.createVote.position);
+        }
+    });
 
     // handle avatar
     const imagehandler = (e) => {
@@ -57,8 +70,11 @@ const CreateVote = () => {
             setVoteId(data.response.position_id);
             
             alert("vote successfully created");
-            setStep(2);
             setIsLoading(false);
+
+            dispatch(setstep(2));
+
+            dispatch(setPosition(voteInfo));
         }
         else 
         {
@@ -135,6 +151,14 @@ const CreateVote = () => {
                 </form>
             </div>}
             {step===2 && <div>
+                <div>
+                <p>
+                    position: {voteInfo.name}
+                    </p>
+                    <p>
+                    description: {voteInfo.description}
+                    </p>
+                </div>
                 <h2>insert details of candidates</h2>
                 <form onSubmit={formHandler2}>
                     <lable>Name: </lable>
