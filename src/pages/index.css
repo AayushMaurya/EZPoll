@@ -425,6 +425,12 @@
   border-radius: 5px;
 }
 
+/* Poll Result  */
+
+.pollRes{
+  font-size: 25px;
+}
+
 /* Create Vote  */
 
 .stp1{
