@@ -23,13 +23,13 @@ const CreateVote = () => {
   const store = useSelector((store) => store);
 
   // check if there is already a vote
-  // useEffect(() => {
-  //     if(store.createVote.isThere)
-  //     {
-  //         setStep(store.createVote.step);
-  //         setVoteInfo(store.createVote.position);
-  //     }
-  // });
+  useEffect(() => {
+      if(store.createVote.isThere)
+      {
+          setStep(store.createVote.step);
+          setVoteInfo(store.createVote.position);
+      }
+  });
 
   // handle avatar
   const imagehandler = (e) => {
@@ -122,10 +122,10 @@ const CreateVote = () => {
   };
 
   const next = () => {
-    setStep(3);
+    dispatch(setstep(3));
   };
   const back = () => {
-    setStep(2);
+    dispatch(setstep(2));
   };
 
   return (
@@ -195,7 +195,7 @@ const CreateVote = () => {
             <h4 className="stpD">Enter details of the Candidate</h4>
           </div>
           <div className="row">
-            <form onSubmit={formHandler1}>
+            <form onSubmit={formHandler2}>
               <div className="row">
                 <div className="col my-1">
                   <h4 className="pos">Name </h4>
