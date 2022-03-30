@@ -1,197 +1,340 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createVote, addCandidate, addVoters } from "../../apis/voteApi"
+import { createVote, addCandidate, addVoters } from "../../apis/voteApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosition, setstep } from "../../redux/actions/createVoteAction";
 
 const CreateVote = () => {
-    const navigate = useNavigate();
-    const [step, setStep] = useState(1);
-    const [isLoading, setIsLoading] = useState(false);
-    const [voteInfo, setVoteInfo] = useState({
-        name: "",
-        description: ""
+  const navigate = useNavigate();
+  const [step, setStep] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [voteInfo, setVoteInfo] = useState({
+    name: "",
+    description: "",
+  });
+  const [name, setName] = useState("");
+  const [partyName, setPartyName] = useState("");
+  const [phone, setPhone] = useState(null);
+  const [email, setEmail] = useState("");
+  const [profile, setProfile] = useState(null);
+  const [voteId, setVoteId] = useState();
+  const [voterList, setVoterList] = useState(null);
+  const dispatch = useDispatch();
+  const store = useSelector((store) => store);
+
+  // check if there is already a vote
+  // useEffect(() => {
+  //     if(store.createVote.isThere)
+  //     {
+  //         setStep(store.createVote.step);
+  //         setVoteInfo(store.createVote.position);
+  //     }
+  // });
+
+  // handle avatar
+  const imagehandler = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      let img = e.target.files[0];
+      setProfile(img);
+    }
+  };
+
+  // handle voter list
+  const voterListHandler = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      let xml = e.target.files[0];
+      setVoterList(xml);
+    }
+  };
+
+  // handle vote info
+  const changeHandler1 = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setVoteInfo({
+      ...voteInfo,
+      [name]: value,
     });
-    const [name, setName] = useState('');
-    const [partyName, setPartyName] = useState('');
-    const [phone, setPhone] = useState(null);
-    const [email, setEmail] = useState('');
-    const [profile, setProfile] = useState(null);
-    const [voteId, setVoteId] = useState();
-    const [voterList, setVoterList] = useState(null);
-    const dispatch = useDispatch();
-    const store = useSelector((store) => store);
+  };
 
-    // check if there is already a vote
-    useEffect(() => {
-        if(store.createVote.isThere)
-        {
-            setStep(store.createVote.step);
-            setVoteInfo(store.createVote.position);
-        }
-    });
+  // submit vote details
+  const formHandler1 = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-    // handle avatar
-    const imagehandler = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            let img = e.target.files[0]
-            setProfile(img);
-        }
+    var data = await createVote(voteInfo);
+    if (data.success) {
+      console.log("voteId:", data.response._id);
+      setVoteId(data.response.position_id);
+
+      alert("vote successfully created");
+      setIsLoading(false);
+
+      dispatch(setstep(2));
+
+      dispatch(setPosition(voteInfo));
+    } else {
+      setIsLoading(false);
+      alert(data.message);
     }
+  };
 
-    // handle voter list
-    const voterListHandler = (e) => {
-        if(e.target.files && e.target.files[0]) {
-            let xml = e.target.files[0];
-            setVoterList(xml);
-        }
+  // submit candidate details
+  const formHandler2 = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    formData.append("partyName", partyName);
+    formData.append("profile", profile);
+    formData.append("position_id", voteId);
+
+    const data = await addCandidate(formData);
+    if (data.success) {
+      console.log("success:", data);
+      setIsLoading(false);
+    } else {
+      alert(data.message);
+      setIsLoading(false);
     }
+  };
 
-    // handle vote info
-    const changeHandler1 = (e) =>{
-        let name = e.target.name;
-        let value = e.target.value;
+  // submit voter list
+  const formHandler3 = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-        setVoteInfo({
-            ...voteInfo,
-            [name]: value
-        });
+    const formData = new FormData();
+    formData.append("excel", voterList);
+
+    const data = await addVoters(formData);
+    if (data.success) {
+      setIsLoading(false);
+      navigate("/");
+    } else {
+      alert(data.message);
+      setIsLoading(false);
     }
+  };
 
-    // submit vote details
-    const formHandler1 = async (e) =>{
-        e.preventDefault();
-        setIsLoading(true);
+  const next = () => {
+    setStep(3);
+  };
+  const back = () => {
+    setStep(2);
+  };
 
-        
-        var data = await createVote(voteInfo);
-        if(data.success){
-            console.log("voteId:", data.response._id);
-            setVoteId(data.response.position_id);
-            
-            alert("vote successfully created");
-            setIsLoading(false);
-
-            dispatch(setstep(2));
-
-            dispatch(setPosition(voteInfo));
-        }
-        else 
-        {
-            setIsLoading(false)
-            alert(data.message);
-        }
-    }
-
-    // submit candidate details 
-    const formHandler2 = async (e) => {
-        e.preventDefault();
-        setIsLoading(true);
-
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('phone', phone);
-        formData.append('email', email);
-        formData.append('partyName', partyName);
-        formData.append('profile', profile);
-        formData.append('position_id', voteId);
-
-        const data = await addCandidate(formData);
-        if(data.success)
-        {
-            console.log("success:", data);
-            setIsLoading(false);
-        }
-        else{
-            alert(data.message);
-            setIsLoading(false);
-        }
-    }
-
-    // submit voter list
-    const formHandler3 = async (e) => {
-        e.preventDefault();
-        setIsLoading(true);
-
-        const formData = new FormData();
-        formData.append('excel', voterList);
-
-        const data = await addVoters(formData);
-        if(data.success)
-        {
-            setIsLoading(false);
-            navigate('/');
-        }
-        else
-        {
-            alert(data.message);
-            setIsLoading(false);
-        }
-    }
-
-    const next = () =>{
-        setStep(3);
-    }
-    const back = () =>{
-        setStep(2);
-    }
-
-    return(
-        <>
-            {step===1 && <div>
-                <h2>Insert details of position vote for</h2>
-                <form onSubmit={formHandler1}>
-                    <lable>Position Name: </lable>
-                    <input type="text" name="name" required value={voteInfo.name} onChange={changeHandler1} />
-                    <br />
-                    <lable>Description of position</lable>
-                    <input type="text" name="description" required value={voteInfo.description} onChange={changeHandler1} />
-                    <br />
-                    {!isLoading && <button type="submit">Create</button>}
-                </form>
-            </div>}
-            {step===2 && <div>
-                <div>
-                <p>
-                    position: {voteInfo.name}
-                    </p>
-                    <p>
-                    description: {voteInfo.description}
-                    </p>
+  return (
+    <>
+      {step === 1 && (
+        <div className="container stp1">
+          <div className="row">
+            <h2 className="stp">Step 1 of 3</h2>
+          </div>
+          <div className="row">
+            <h4 className="stpD">Enter details of Position</h4>
+          </div>
+          <div className="row">
+            <form onSubmit={formHandler1}>
+              <div className="row">
+                <div className="col my-1">
+                  <h4 className="pos">Position Name </h4>
                 </div>
-                <h2>insert details of candidates</h2>
-                <form onSubmit={formHandler2}>
-                    <lable>Name: </lable>
-                    <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
-                    <br />
-                    <lable>Party Name:  </lable>
-                    <input type="text" name="partyName" value={partyName} onChange={(e) => setPartyName(e.target.value)} required />
-                    <br />
-                    <lable>Phone:  </lable>
-                    <input type="tel" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} required />
-                    <br />
-                    <lable>Email:  </lable>
-                    <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                    <br />
-                    <lable>Avatar:  </lable>
-                    <input required type="file" accept=".jpg,.png,.jpeg" onChange={imagehandler} />
-                    <br />
-                    {!isLoading && <button type="submit">Add</button>}
-                </form>
-                <button onClick={next}>Next</button>
-               
-            </div>}
-            {step===3 && <div>
-                <h2>insert voters list</h2>
-                <form onSubmit={formHandler3}>
-                    <input type="file" required name="voterList" onChange={voterListHandler} />
-                    <button type="submit">submit</button>
-                </form>
-                <button onClick={back}>back</button>
-            </div>}
-            <lable>step: {step}</lable>
-        </>
-    );
-}
+                <div className="col-6">
+                  <input
+                    type="text"
+                    name="name"
+                    className="stpInp"
+                    required
+                    value={voteInfo.name}
+                    onChange={changeHandler1}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col">
+                  <h4 className="pos">Description of position</h4>
+                </div>
+                <div className="col-6">
+                  <input
+                    type="text"
+                    name="description"
+                    className="stpInp"
+                    required
+                    value={voteInfo.description}
+                    onChange={changeHandler1}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                {!isLoading && (
+                  <button type="submit" className="btn3 mx-2">
+                    Create
+                  </button>
+                )}
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      {step === 2 && (
+        <div className="container stp1">
+          <div className="row">
+            <h2 className="stp">Step 2 of 3</h2>
+          </div>
+
+          {/* <div className="row">
+            <h4 className="posD">Position {voteInfo.name}</h4>
+            <h4 className="posD">Description {voteInfo.description}</h4>
+          </div> */}
+          <div className="row">
+            <h4 className="stpD">Enter details of the Candidate</h4>
+          </div>
+          <div className="row">
+            <form onSubmit={formHandler1}>
+              <div className="row">
+                <div className="col my-1">
+                  <h4 className="pos">Name </h4>
+                </div>
+                <div className="col-6">
+                  <input
+                    type="text"
+                    className="stpInp"
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col my-1">
+                  <h4 className="pos">Party Name </h4>
+                </div>
+                <div className="col-6">
+                  <input
+                    className="stpInp"
+                    type="text"
+                    name="partyName"
+                    value={partyName}
+                    onChange={(e) => setPartyName(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col my-1">
+                  <h4 className="pos">Mobile No. </h4>
+                </div>
+                <div className="col-6">
+                  <input
+                    className="stpInp"
+                    type="tel"
+                    name="phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col my-1">
+                  <h4 className="pos">Email </h4>
+                </div>
+                <div className="col-6">
+                  <input
+                    type="email"
+                    className="stpInp"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col my-1">
+                  <h4 className="pos">Avatar </h4>
+                </div>
+                <div className="col-6">
+                  <input
+                    className="stpInpF"
+                    required
+                    type="file"
+                    accept=".jpg,.png,.jpeg"
+                    onChange={imagehandler}
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col">
+                  {!isLoading && (
+                    <button type="submit" className="btn3">
+                      Add
+                    </button>
+                  )}
+                </div>
+                <div className="col-1">
+                  <button className="btn4" onClick={next}>
+                    Next
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {step === 3 && (
+        <div className="container stp1">
+          <div className="row">
+            <h2 className="stp">Step 3 of 3</h2>
+          </div>
+          <div className="row">
+            <h4 className="stpD">Insert Voters List</h4>
+          </div>
+
+          <form onSubmit={formHandler1}>
+            <div className="row">
+              <div className="col-6">
+                <input
+                  type="file"
+                  className="stpInpF"
+                  required
+                  name="voterList"
+                  onChange={voterListHandler}
+                />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col">
+                {!isLoading && (
+                  <button type="submit" className="btn3">
+                    Create
+                  </button>
+                )}
+              </div>
+              <div className="col-1">
+                <button className="btn4" onClick={back}>
+                  Back
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      )}
+      {/* <lable>step: {step}</lable> */}
+    </>
+  );
+};
 
 export default CreateVote;
