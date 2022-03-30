@@ -26,6 +26,7 @@ import ClientDashboard from "./pages/client/ClientDashboard";
 import CreateVote from "./pages/vote/CreateVote";
 import VoterLogin from "./pages/voter/VoterLogin";
 import VoterHome from "./pages/voter/VoterHome";
+import Vote from "./pages/vote/Vote";
 
 // check for voter
 if (window.localStorage.voterJwtToken) {
@@ -101,6 +102,7 @@ function App() {
           <Route exact path="/createVote" element={<CreateVote />} />
           <Route exact path="/voterLogin" element={<VoterLogin />} />
           <Route exact path="/voterHome" element={<VoterHome />} />
+          <Route exact path="/vote/:id" element={<Vote />} />
         </Routes>
       </Router>
     </div>

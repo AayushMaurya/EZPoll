@@ -49,3 +49,18 @@ export const addVoters = async (voterList) => {
     }
 }
 
+export const getVoteInfo = async (vote_id) => {
+    const uri = "https://ezserver.herokuapp.com/api/voter/getAllCandidate/" + vote_id;
+    try{
+        const { data } = await axios.get(uri);
+        return data;
+    }
+    catch(err){
+        console.log(err);
+        return {
+            success: false,
+            message: "cannot load the vote at this moment"
+        };
+    }
+}
+
