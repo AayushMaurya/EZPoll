@@ -419,3 +419,79 @@
   margin: auto;
   border-radius: 10px;
 }
+.vloginBtn{
+  margin: auto;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+/* Create Vote  */
+
+.stp1{
+  /* background-color: #68e5b2; */
+  margin-top: 30px;
+  width: 50%;
+}
+.stp{
+  color: #bfafff;
+  font-size: 50px;
+  font-weight: 1000;
+  margin-bottom: 20px;
+}
+.stpD{
+  font-size: 25px;
+  color: gray;
+  margin-bottom: 20px;
+}
+.btn3{
+  background-color: #bfafff;
+  /* margin: auto; */
+  /* margin-left: 12px; */
+  margin-top: 20px;
+  border-radius: 5px;
+  width: fit-content;
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  border: 3px solid #bfafff;
+}
+.btn3:hover{
+  color: #bfafff;
+  background-color: white;
+}
+.btn4{
+  background-color: #a7ffdc;
+  /* margin: auto; */
+  /* margin-left: 12px; */
+  margin-top: 20px;
+  border-radius: 5px;
+  width: fit-content;
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  border: 3px solid #a7ffdc;
+}
+.btn4:hover{
+  color: #a7ffdc;
+  background-color: white;
+}
+.pos{
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+.stpInp{
+  width: 100%;
+  border-radius: 5px;
+  font-size: 20px;
+  padding-left: 10px;
+  outline: none;
+}
+.stpInpF{
+  width: 100%;
+  border-radius: 5px;
+  margin-left: -10px;
+  cursor: pointer;
+  font-size: 20px;
+  padding-left: 10px;
+  outline: none;
+}

@@ -1,67 +1,93 @@
 import React, { useEffect, useState } from "react";
-import { checkVoterLoginData } from "../../apis/voterApi"
+import { checkVoterLoginData } from "../../apis/voterApi";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setVoter } from "../../redux/actions/voterAction";
 import decodeToken from "../../utils/decodeToken";
 
 const VoterLogin = () => {
-    const [voterLoginInfo, setVoterLoginInfo] = useState({
-        username: "",
-        password: ""
-    });
-    const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
-    const store = useSelector((store) => store);
-    const dispatch = useDispatch();
+  const [voterLoginInfo, setVoterLoginInfo] = useState({
+    username: "",
+    password: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const store = useSelector((store) => store);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (store.voter.isAuthenticated) {
-            navigate("/voterHome")
-        }
-    });
-
-    const changeHandler = (e) => {
-        let name = e.target.name;
-        let value = e.target.value;
-
-        setVoterLoginInfo({
-            ...voterLoginInfo,
-            [name]: value
-        });
+  useEffect(() => {
+    if (store.voter.isAuthenticated) {
+      navigate("/voterHome");
     }
+  });
 
-    const formHandler = async (e) => {
-        e.preventDefault();
-        setIsLoading(true);
+  const changeHandler = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
 
-        console.log("login info: ", voterLoginInfo);
+    setVoterLoginInfo({
+      ...voterLoginInfo,
+      [name]: value,
+    });
+  };
 
-        const data = await checkVoterLoginData(voterLoginInfo);
-        if (data.success) {
-            const voterCridentials = decodeToken(data.token);
-            alert("loged in");
-            dispatch(setVoter(voterCridentials));
-        }
-        else {
-            alert(data.message);
-            setIsLoading(false);
-        }
+  const formHandler = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    console.log("login info: ", voterLoginInfo);
+
+    const data = await checkVoterLoginData(voterLoginInfo);
+    if (data.success) {
+      const voterCridentials = decodeToken(data.token);
+      alert("loged in");
+      dispatch(setVoter(voterCridentials));
+    } else {
+      alert(data.message);
+      setIsLoading(false);
     }
+  };
 
-    return (
-        <>
-            <form onSubmit={formHandler}>
-                <lable>Username: </lable>
-                <input type="text" name="username" value={voterLoginInfo.username} onChange={changeHandler} required />
-                <br />
-                <lable>Password: </lable>
-                <input type="text" name="password" value={voterLoginInfo.password} onChange={changeHandler} required />
-                <br />
-                {!isLoading && <button type="submit">login</button>}
-            </form>
-        </>
-    )
-}
+  return (
+    <>
+      <div className="container loginForm">
+        <div className="row formBody">
+          <div className="row">
+            <h3 className="clientLoginTitle">Voter Login</h3>
+          </div>
+
+          <form onSubmit={formHandler}>
+            <input
+              className="inp"
+              type="text"
+              name="username"
+              onChange={changeHandler}
+              value={voterLoginInfo.username}
+              placeholder="Username"
+              required
+            />
+            <br />
+            <input
+              className="inp"
+              type="text"
+              name="password"
+              onChange={changeHandler}
+              value={voterLoginInfo.password}
+              placeholder="Password"
+              required
+            />
+            <div className="row">
+              {!isLoading && (
+                <button type="submit" className="btn2 vloginBtn">
+                  Login
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default VoterLogin;
