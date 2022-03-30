@@ -42,12 +42,23 @@ const CreatePoll = () => {
     if (data.success) {
       alert("Poll successfully created");
       setIsCreated(true);
+      
       setpoll_id(data.poll.poll_id);
     } else {
       setIsLoading(false);
       alert(data.message);
     }
+
+    // const temp = "http://localhost:3000/poll/" + {poll_id};
+    //   setText(temp);
   };
+  
+  // copy link
+  const copy = async () => {
+    const text = `http://localhost:3000/poll/${poll_id}`;
+    await navigator.clipboard.writeText(text);
+    // alert('Text copied');
+  }
 
   return (
     <>
@@ -157,7 +168,8 @@ const CreatePoll = () => {
                   </h4>
                 </div>
                 <div className="col">
-                  <button className="btn2 copyBtn">Copy</button>
+                <button onClick={copy}>Copy</button>  
+                  {/* <button className="btn2 copyBtn">Copy</button> */}
                 </div>
               </div>
             </div>
