@@ -69,21 +69,28 @@ const CreateVote = () => {
       console.log("voteId:", data.response._id);
       setVoteId(data.response.position_id);
 
-      alert("vote successfully created");
-      setIsLoading(false);
-
       // set position and step in redux
       dispatch(setstep(2));
       dispatch(setPosition(voteInfo));
+
+      alert("vote successfully created");
+      setIsLoading(false);
+      try{
+      const token = decodeToken(store.createVote);
+      localStorage.setItem('createVoteJwtToken', token);
+      }
+      catch(err){
+        console.log(err);
+      }
 
     } else {
       setIsLoading(false);
       alert(data.message);
     }
     // store data in local storage
-    console.log("store.createVote: ", store.createVote)
-    // const token = await decodeToken(store.createVote);
-    // localStorage.setItem('createVoteJwtToken', 123);
+    // console.log("store.createVote: ", store.createVote.isThere)
+    // const token = await decodeToken({name: "aayush"});
+    // localStorage.setItem('createVoteJwtToken', token);
     // console.log("token: ", token);
   };
 

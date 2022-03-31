@@ -45,8 +45,8 @@ if (window.localStorage.voterJwtToken) {
   }
 }
 
-if(window.localStorage.createVoteJwtToken)
-{
+// check for createVoteJwtToken
+if (window.localStorage.createVoteJwtToken) {
   console.log("setting the createVOte details");
   const decode = decodeToken(localStorage.createVoteJwtToken);
   store.dispatch(setPosition(decode.position));
