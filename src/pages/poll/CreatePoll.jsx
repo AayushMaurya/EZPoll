@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createPoll } from "../../apis/pollApi";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+import QRCode from "qrcode.react";
 
 const CreatePoll = () => {
   const [pollinfo, setPollInfo] = useState({
@@ -16,6 +17,7 @@ const CreatePoll = () => {
   const [poll_id, setpoll_id] = useState("");
   const navigate = useNavigate();
   const store = useSelector((store) => store);
+  const [ULR, setULR] = useState("");
 
   useEffect(() => {
     // iski wajah se back button press karne par wapas nhi ja pa rhe
@@ -42,8 +44,11 @@ const CreatePoll = () => {
     if (data.success) {
       alert("Poll successfully created");
       setIsCreated(true);
-      
+
       setpoll_id(data.poll.poll_id);
+
+      const text = `http://localhost:3000/poll/${poll_id}`;
+      setULR(text);
     } else {
       setIsLoading(false);
       alert(data.message);
@@ -52,17 +57,18 @@ const CreatePoll = () => {
     // const temp = "http://localhost:3000/poll/" + {poll_id};
     //   setText(temp);
   };
-  
+
   // copy link
   const copy = async () => {
     const text = `http://localhost:3000/poll/${poll_id}`;
+    // setULR(text);
     await navigator.clipboard.writeText(text);
     // alert('Text copied');
   }
 
   return (
     <>
-      {!isCreated && (                    
+      {!isCreated && (
         <div>
           <div className="container createForm">
             <div className="row formHead">
@@ -168,9 +174,10 @@ const CreatePoll = () => {
                   </h4>
                 </div>
                 <div className="col">
-                <button onClick={copy}>Copy</button>  
+                  <button className="btn2 copyBtn" onClick={copy}>Copy</button>
                   {/* <button className="btn2 copyBtn">Copy</button> */}
                 </div>
+                <QRCode value={ULR} />
               </div>
             </div>
           </div>

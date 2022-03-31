@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getPollInfo, submitPollChoice } from "../apis/pollApi";
 import { useNavigate } from "react-router";
+import QRCode from "qrcode.react";
 
 const Poll = () => {
   const { id } = useParams();
@@ -14,6 +15,8 @@ const Poll = () => {
     choice: "",
   });
   const [loadinSubmit, setLoadingSubmit] = useState(false);
+  const [ULR, setULR] = useState("");
+
 
   useEffect(async () => {
     const data = await getPollInfo(id);
@@ -31,6 +34,8 @@ const Poll = () => {
       alert(data.message);
       navigate("/polls");
     }
+    const text = `http://localhost:3000/poll/${id}`;
+    setULR(text);
   }, []);
 
   const changeHandler = (e) => {
@@ -62,6 +67,14 @@ const copyToClipboard = e => {
       if (data.message == "Already voted") navigate(`/pollResult/${id}`);
     }
   };
+
+  // copy link
+  const copy = async () => {
+    const text = `http://localhost:3000/poll/${id}`;
+    // setULR(text);
+    await navigator.clipboard.writeText(text);
+    // alert('Text copied');
+  }
 
   return (
     <>
@@ -139,11 +152,13 @@ const copyToClipboard = e => {
               </div>
               <div className="row">
                   <div className="col">
-                    <h4 className="shLink">Link to POLL</h4>
+                    <h4 className="shLink">Link to POLL: </h4>
+                    <a href={ULR}>{ULR}</a>
                   </div>
                   <div className="col-2">
-                    <button className="btn2 copyBtn">Copy</button>
+                    <button className="btn2 copyBtn" onClick={copy}>Copy</button>
                   </div>
+                  <QRCode value={ULR} />
               </div>
           </div>
           
