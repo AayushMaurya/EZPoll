@@ -3,7 +3,7 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import AdminHome from "./pages/admin/AdminHome";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import setAuthToken from "./utils/setAuthToken";
-import decodeToken from "./utils/decodeToken";
+import { decodeToken } from "./utils/decodeToken";
 import { useSelector } from "react-redux";
 import { setAdmin, adminLogout } from "./redux/actions/adminAction";
 import { setClient, clientLogout } from "./redux/actions/clientAction";
@@ -27,6 +27,7 @@ import CreateVote from "./pages/vote/CreateVote";
 import VoterLogin from "./pages/voter/VoterLogin";
 import VoterHome from "./pages/voter/VoterHome";
 import Vote from "./pages/vote/Vote";
+import { setCandidate, setPosition, setstep } from "./redux/actions/createVoteAction";
 
 // check for voter
 if (window.localStorage.voterJwtToken) {
@@ -42,6 +43,15 @@ if (window.localStorage.voterJwtToken) {
     setAuthToken(localStorage.voterJwtToken);
     store.dispatch(setVoter(decode));
   }
+}
+
+if(window.localStorage.createVoteJwtToken)
+{
+  console.log("setting the createVOte details");
+  const decode = decodeToken(localStorage.createVoteJwtToken);
+  store.dispatch(setPosition(decode.position));
+  store.dispatch(setstep(decode.step));
+  store.dispatch(setCandidate(decode.candidate));
 }
 
 // check for admin

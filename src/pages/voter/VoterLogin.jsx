@@ -3,7 +3,7 @@ import { checkVoterLoginData } from "../../apis/voterApi";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setVoter } from "../../redux/actions/voterAction";
-import decodeToken from "../../utils/decodeToken";
+import { decodeToken } from "../../utils/decodeToken";
 
 const VoterLogin = () => {
   const [voterLoginInfo, setVoterLoginInfo] = useState({

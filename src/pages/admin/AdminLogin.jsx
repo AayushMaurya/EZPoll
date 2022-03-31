@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux'
 import { setAdmin } from "../../redux/actions/adminAction";
-import decodeToken from "../../utils/decodeToken";
+import { decodeToken } from "../../utils/decodeToken";
 import { checkAdminLoginData } from "../../apis/adminApi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
     const navigate = useNavigate();
-    const store= useSelector((store) => store);
+    const store = useSelector((store) => store);
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const [loginInfo, setLoginInfo] = useState({
@@ -17,12 +17,12 @@ const AdminLogin = () => {
     });
 
     useEffect(() => {
-        if(store.admin.isAuthenticated){
+        if (store.admin.isAuthenticated) {
             navigate('/admin');
-        }      
+        }
     }, [store.admin.isAuthenticated])
 
-    const changeHandler=(e)=>{
+    const changeHandler = (e) => {
         let name = e.target.name;
         let value = e.target.value;
 
@@ -34,15 +34,14 @@ const AdminLogin = () => {
         setIsLoading(true);
 
         const token = await checkAdminLoginData(loginInfo);
-        if(token)
-        {
+        if (token) {
             console.log("admin ok with token: ", token);
             const adminCridentials = decodeToken(token);
             console.log(adminCridentials);
-            
+
             dispatch(setAdmin(adminCridentials));
         }
-        else{
+        else {
             console.log("login info is wrong");
             setIsLoading(false);
         }

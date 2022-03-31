@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import decodeToken from "../../utils/decodeToken";
+import { decodeToken } from "../../utils/decodeToken";
 import { useNavigate } from "react-router-dom";
 import { addNewClient, checkClientLoginData } from "../../apis/clientApi";
 import { setClient } from "../../redux/actions/clientAction";

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import decodeToken from "../../utils/decodeToken";
+import { decodeToken } from "../../utils/decodeToken";
 import { setAdmin } from "../../redux/actions/adminAction";
 import { addNewAdmin, checkAdminLoginData } from "../../apis/adminApi"
 import { useNavigate } from "react-router-dom";

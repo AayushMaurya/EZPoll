@@ -1,7 +1,12 @@
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
 
-const decodeToken = (token) =>{
-    return jwt_decode(token);
+const sign = require('jwt-encode');
+const secret = 'secret';
+
+export const encodeToken = (data) => {
+    return sign(data, secret);
 }
 
-export default decodeToken;
+export const decodeToken = (token) =>{
+    return jwt_decode(token);
+}

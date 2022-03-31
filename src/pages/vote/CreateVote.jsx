@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { createVote, addCandidate, addVoters } from "../../apis/voteApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosition, setstep } from "../../redux/actions/createVoteAction";
+import { decodeToken } from "../../utils/decodeToken";
 
 const CreateVote = () => {
   const navigate = useNavigate();
@@ -71,13 +72,19 @@ const CreateVote = () => {
       alert("vote successfully created");
       setIsLoading(false);
 
+      // set position and step in redux
       dispatch(setstep(2));
-
       dispatch(setPosition(voteInfo));
+
     } else {
       setIsLoading(false);
       alert(data.message);
     }
+    // store data in local storage
+    console.log("store.createVote: ", store.createVote)
+    // const token = await decodeToken(store.createVote);
+    // localStorage.setItem('createVoteJwtToken', 123);
+    // console.log("token: ", token);
   };
 
   // submit candidate details
@@ -187,10 +194,10 @@ const CreateVote = () => {
             <h2 className="stp">Step 2 of 3</h2>
           </div>
 
-          {/* <div className="row">
+          <div className="row">
             <h4 className="posD">Position {voteInfo.name}</h4>
             <h4 className="posD">Description {voteInfo.description}</h4>
-          </div> */}
+          </div>
           <div className="row">
             <h4 className="stpD">Enter details of the Candidate</h4>
           </div>
