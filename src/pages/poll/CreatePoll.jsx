@@ -5,13 +5,18 @@ import { useSelector } from "react-redux";
 import QRCode from "qrcode.react";
 
 const CreatePoll = () => {
-  const [pollinfo, setPollInfo] = useState({
+  // const [pollinfo, setPollInfo] = useState({
+  //   title: "",
+  //   description: "",
+  //   choice1: "",
+  //   choice2: "",
+  //   choice3: "",
+  // });
+  const [pollInfo, setPollInfo] = useState({
     title: "",
-    description: "",
-    choice1: "",
-    choice2: "",
-    choice3: "",
+    description: ""
   });
+  const [choices, setChoices] = useState([{choiceNo: "", choiceValue: ""}, {choiceNo: "", choiceValue: ""}]);
   const [isLoading, setIsLoading] = useState(false);
   const [isCreated, setIsCreated] = useState(false);
   const [poll_id, setpoll_id] = useState("");
@@ -25,21 +30,37 @@ const CreatePoll = () => {
     if (!store.client.isAuthenticated) navigate("/clientSignup");
   }, []);
 
-  const changeHandler = (e) => {
+  const changeHandler1 = (e) => {
     let name = e.target.name;
     let value = e.target.value;
 
     setPollInfo({
-      ...pollinfo,
+      ...pollInfo,
       [name]: value,
     });
   };
+
+  // handle choice change
+  const changeHandler2 = (e, index) => {
+    const values = [...choices];
+    values[index].choiceNo = e.target.name;
+    values[index].choiceValue = e.target.value;
+    setChoices(values);
+  }
 
   const formHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    var data = await createPoll(pollinfo);
+    console.log("choices: ", choices);
+
+    const formData = new FormData();
+
+    formData.append('title', pollInfo.title);
+    formData.append('description', pollInfo.description);
+    formData.append('choices', choices);
+
+    var data = await createPoll(formData);
 
     if (data.success) {
       alert("Poll successfully created");
@@ -54,8 +75,6 @@ const CreatePoll = () => {
       alert(data.message);
     }
 
-    // const temp = "http://localhost:3000/poll/" + {poll_id};
-    //   setText(temp);
   };
 
   // copy link
@@ -63,7 +82,18 @@ const CreatePoll = () => {
     const text = `http://localhost:3000/poll/${poll_id}`;
     // setULR(text);
     await navigator.clipboard.writeText(text);
-    // alert('Text copied');
+  }
+
+  // add choice
+  const addChoice = () => {
+    setChoices([...choices, {choiceNo: "", choiceValue: ""}]);
+  }
+
+  // remove choice
+  const removeChoice = () => {
+    const values = [...choices];
+    values.splice(-1);
+    setChoices(values);
   }
 
   return (
@@ -89,8 +119,8 @@ const CreatePoll = () => {
                   className="formInp"
                   name="title"
                   required
-                  value={pollinfo.title}
-                  onChange={changeHandler}
+                  value={pollInfo.title}
+                  onChange={changeHandler1}
                 />
                 <br />
                 <h4 className="formEle">Description</h4>
@@ -98,12 +128,27 @@ const CreatePoll = () => {
                   type="text"
                   className="formInp"
                   name="description"
-                  value={pollinfo.desc}
-                  onChange={changeHandler}
+                  value={pollInfo.description}
+                  onChange={changeHandler1}
                 />
                 <br />
                 <h4 className="formEle">Answer options </h4>
-                <input
+                {choices.map((choice, index) => (
+                  <div key={index}>
+                  <input
+                  type="text"
+                  className="formInp"
+                  name={`choice${index+1}`}
+                  required
+                  value={choice.choiceValue}
+                  onChange={e => changeHandler2(e, index)}
+                  placeholder={`option ${index+1}`}
+                />
+                  </div>
+                ))}
+                <button type="button" onClick={addChoice}>+</button>
+                <button type="button" onClick={removeChoice}>-</button>
+                {/* <input
                   type="text"
                   className="formInp"
                   name="choice1"
@@ -129,7 +174,7 @@ const CreatePoll = () => {
                   value={pollinfo.choice3}
                   onChange={changeHandler}
                   placeholder="Option 3 "
-                />
+                /> */}
                 <div className="row crBtn">
                   {!isLoading && (
                     <button type="submit" className="createbtn">
@@ -150,13 +195,13 @@ const CreatePoll = () => {
           </div>
           <div className="row created">
             <div className="row createdHeader">
-              <h4 className="createdTitle">{pollinfo.title}</h4>
-              <h4 className="createdDes">{pollinfo.description}</h4>
+              <h4 className="createdTitle">{pollInfo.title}</h4>
+              <h4 className="createdDes">{pollInfo.description}</h4>
             </div>
             <div className="row">
               <h4 className="createdChoices">Choices</h4>
             </div>
-            <div className="row">
+            {/* <div className="row">
               <h4 className="creatdC">{pollinfo.choice1}</h4>
             </div>
             <div className="row">
@@ -164,7 +209,7 @@ const CreatePoll = () => {
             </div>
             <div className="row">
               <h4 className="creatdC">{pollinfo.choice3}</h4>
-            </div>
+            </div> */}
             <div className="row createdFooter">
               <h4 className="createdL">Poll Link</h4>
               <div className="row crL">
