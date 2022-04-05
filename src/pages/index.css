@@ -265,7 +265,41 @@
   color: #7255e8;
 }
 
+
+.addBtn{
+  margin-right: 40%;
+  margin-left: 12px;
+  width: 20px;
+  border: 2px solid #7255e8;
+}
+.subBtn{
+  margin-left: 40%;
+  margin-right: 12px;
+  width: 20px;
+}
+
+.link{
+  text-decoration: none;
+  color: black;
+}
+
+.showQrBtn{
+  font-size: 13px !important;
+  padding: 2px !important;
+  padding-left: 10px !important;
+  margin-left: 2vw !important;
+  padding-right: 10px !important;
+  font-weight: 500 !important;
+  margin-top: 0px !important;
+  /* margin-left: 10px; */
+}
+
+
+.qrStyle{
+  text-align: center;
+}
 /* poll section */
+
 .pollSecCen{
   margin: auto;
 }

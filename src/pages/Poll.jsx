@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getPollInfo, submitPollChoice } from "../apis/pollApi";
 import { useNavigate } from "react-router";
+// import Modal from 'react-overlays/Modal'
+import Modal from "react-bootstrap/Modal";
+import { Button } from "react-bootstrap";
 import QRCode from "qrcode.react";
 
 const Poll = () => {
@@ -17,6 +20,10 @@ const Poll = () => {
   const [loadinSubmit, setLoadingSubmit] = useState(false);
   const [ULR, setULR] = useState("");
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(async () => {
     const data = await getPollInfo(id);
@@ -47,9 +54,9 @@ const Poll = () => {
       [name]: value,
     });
   };
-const copyToClipboard = e => {
-  navigator.clipboard.writeText(window.location.toString())
-}
+  const copyToClipboard = (e) => {
+    navigator.clipboard.writeText(window.location.toString());
+  };
   const formHandler = async (e) => {
     e.preventDefault();
     setLoadingSubmit(true);
@@ -74,7 +81,7 @@ const copyToClipboard = e => {
     // setULR(text);
     await navigator.clipboard.writeText(text);
     // alert('Text copied');
-  }
+  };
 
   return (
     <>
@@ -147,21 +154,60 @@ const copyToClipboard = e => {
             </div>
           </div>
           <div className="container shareSec">
-              <div className="row">
-                  <h4 className="shTitle">Share this Poll with your friends</h4>
+            <div className="row">
+              <h4 className="shTitle">Share this Poll with your friends</h4>
+            </div>
+            <div className="row">
+              <h4 className="shLink">Link to POLL: </h4>
+            </div>
+            <div className="row">
+              <div className="col">
+                <a href={ULR} className="link">
+                  {ULR}
+                </a>
               </div>
-              <div className="row">
-                  <div className="col">
-                    <h4 className="shLink">Link to POLL: </h4>
-                    <a href={ULR}>{ULR}</a>
-                  </div>
-                  <div className="col-2">
-                    <button className="btn2 copyBtn" onClick={copy}>Copy</button>
-                  </div>
-                  <QRCode value={ULR} />
+              <div className="col-2">
+                <button className="btn2 copyBtn" onClick={copy}>
+                  Copy
+                </button>
               </div>
+
+              <div className="col">
+                <Button
+                  type="submit"
+                  onClick={handleShow}
+                  className=" showQrBtn btn3"
+                >
+                  Show QR-Code
+                </Button>
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>
+                      {" "}
+                      <h4 className="shLink">QR-Code</h4>{" "}
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <div className="qrStyle">
+                      <QRCode value={ULR} />
+                    </div>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Close
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              </div>
+
+              {/* <div className="row my-4">
+                <h4 className="shLink">
+                  Scan this QR to access the Poll from your Smartphone
+                </h4>
+                <QRCode value={ULR} />
+              </div> */}
+            </div>
           </div>
-          
         </div>
       )}
     </>

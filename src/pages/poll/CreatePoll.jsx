@@ -3,6 +3,8 @@ import { createPoll } from "../../apis/pollApi";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import QRCode from "qrcode.react";
+import Modal from "react-bootstrap/Modal";
+import { Button } from "react-bootstrap";
 
 const CreatePoll = () => {
   // const [pollinfo, setPollInfo] = useState({
@@ -14,15 +16,22 @@ const CreatePoll = () => {
   // });
   const [pollInfo, setPollInfo] = useState({
     title: "",
-    description: ""
+    description: "",
   });
-  const [choices, setChoices] = useState([{choiceNo: "", choiceValue: ""}, {choiceNo: "", choiceValue: ""}]);
+  const [choices, setChoices] = useState([
+    { choiceNo: "", choiceValue: "" },
+    { choiceNo: "", choiceValue: "" },
+  ]);
   const [isLoading, setIsLoading] = useState(false);
   const [isCreated, setIsCreated] = useState(false);
   const [poll_id, setpoll_id] = useState("");
   const navigate = useNavigate();
   const store = useSelector((store) => store);
   const [ULR, setULR] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     // iski wajah se back button press karne par wapas nhi ja pa rhe
@@ -46,7 +55,7 @@ const CreatePoll = () => {
     values[index].choiceNo = e.target.name;
     values[index].choiceValue = e.target.value;
     setChoices(values);
-  }
+  };
 
   const formHandler = async (e) => {
     e.preventDefault();
@@ -56,9 +65,9 @@ const CreatePoll = () => {
 
     const formData = new FormData();
 
-    formData.append('title', pollInfo.title);
-    formData.append('description', pollInfo.description);
-    formData.append('choices', choices);
+    formData.append("title", pollInfo.title);
+    formData.append("description", pollInfo.description);
+    formData.append("choices", choices);
 
     var data = await createPoll(formData);
 
@@ -74,7 +83,6 @@ const CreatePoll = () => {
       setIsLoading(false);
       alert(data.message);
     }
-
   };
 
   // copy link
@@ -82,19 +90,19 @@ const CreatePoll = () => {
     const text = `http://localhost:3000/poll/${poll_id}`;
     // setULR(text);
     await navigator.clipboard.writeText(text);
-  }
+  };
 
   // add choice
   const addChoice = () => {
-    setChoices([...choices, {choiceNo: "", choiceValue: ""}]);
-  }
+    setChoices([...choices, { choiceNo: "", choiceValue: "" }]);
+  };
 
   // remove choice
   const removeChoice = () => {
     const values = [...choices];
     values.splice(-1);
     setChoices(values);
-  }
+  };
 
   return (
     <>
@@ -135,19 +143,33 @@ const CreatePoll = () => {
                 <h4 className="formEle">Answer options </h4>
                 {choices.map((choice, index) => (
                   <div key={index}>
-                  <input
-                  type="text"
-                  className="formInp"
-                  name={`choice${index+1}`}
-                  required
-                  value={choice.choiceValue}
-                  onChange={e => changeHandler2(e, index)}
-                  placeholder={`option ${index+1}`}
-                />
+                    <input
+                      type="text"
+                      className="formInp"
+                      name={`choice${index + 1}`}
+                      required
+                      value={choice.choiceValue}
+                      onChange={(e) => changeHandler2(e, index)}
+                      placeholder={`option ${index + 1}`}
+                    />
                   </div>
                 ))}
-                <button type="button" onClick={addChoice}>+</button>
-                <button type="button" onClick={removeChoice}>-</button>
+                <div className="row addBtnRow">
+                  <button
+                    type="button"
+                    className="col addBtn btn3"
+                    onClick={addChoice}
+                  >
+                    +
+                  </button>
+                  <button
+                    type="button"
+                    className="col subBtn btn3"
+                    onClick={removeChoice}
+                  >
+                    -
+                  </button>
+                </div>
                 {/* <input
                   type="text"
                   className="formInp"
@@ -219,10 +241,37 @@ const CreatePoll = () => {
                   </h4>
                 </div>
                 <div className="col">
-                  <button className="btn2 copyBtn" onClick={copy}>Copy</button>
-                  {/* <button className="btn2 copyBtn">Copy</button> */}
+                  <button className="btn2 copyBtn" onClick={copy}>
+                    Copy
+                  </button>
                 </div>
-                <QRCode value={ULR} />
+                <div className="col">
+                  <Button
+                    type="submit"
+                    onClick={handleShow}
+                    className=" showQrBtn btn3"
+                  >
+                    Show QR-Code
+                  </Button>
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>
+                        {" "}
+                        <h4 className="shLink">QR-Code</h4>{" "}
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <div className="qrStyle">
+                        <QRCode value={ULR} />
+                      </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                </div>
               </div>
             </div>
           </div>
@@ -233,4 +282,3 @@ const CreatePoll = () => {
 };
 
 export default CreatePoll;
-
