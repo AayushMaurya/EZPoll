@@ -8,7 +8,12 @@ const Vote = () => {
     const [voteInfo, setVoteInfo] = useState();
     const [isVote, setIsVote] = useState(false);
     const navigate = useNavigate();
+    const [userChoice, setUserChoice] = useState({
+        position_id: "",
+        choice_id: ""
+    });
 
+    // fetch the vote info on loading the page
     useEffect(async() => {
         const data = await getVoteInfo(id);
         console.log("received data: ", data);
@@ -25,6 +30,22 @@ const Vote = () => {
 
     }, []);
 
+    const changeHandler = (e) => {
+        console.log("choice: ", e.target.value);
+        setUserChoice({
+            ...userChoice,
+            position_id: voteInfo.position[0].position_id,
+            choice_id: e.target.value
+        });
+    }
+
+    const formHandler = (e) => {
+        e.preventDefault();
+
+        console.log("now the vote is being submitted");
+        console.log("user chocice : ", userChoice);
+    }
+
     return (
         <>
             {!isVote && <h2>Loading poll: {id} ...</h2>}
@@ -35,8 +56,9 @@ const Vote = () => {
                 <br />
                 <h3>Candidates: </h3>
                 <div>
-                    {voteInfo.result.map((candidate) => 
-                        <div id={candidate._id}>
+                <form onSubmit={formHandler}>
+                    {voteInfo.result.map((candidate, index) => 
+                        <div key={index}>
                             <img src={candidate.profile} height="200" width="200" alt="candidate image" />
                             <br />
                             <label>name: {candidate.name}</label>
@@ -47,8 +69,11 @@ const Vote = () => {
                             <br />
                             <label>email: {candidate.email}</label>
                             <br />
+                            <input type="radio" name="choice" value={candidate._id} onChange={changeHandler}/>
                         </div>
                     )}
+                    <button type="submit">Vote</button>
+                </form>
                 </div>
             </div>}
         </>

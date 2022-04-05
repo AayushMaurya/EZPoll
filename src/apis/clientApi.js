@@ -35,8 +35,8 @@ export const addNewClient = async (signupInfo) => {
 
 export const getAllPolls = async () => {
     try{
-        const { data } = await axios.post("https://ezserver.herokuapp.com/api/client/getPoll");
-        console.log(data);
+        const { data } = await axios.get("https://ezserver.herokuapp.com/api/poll/getpoll");
+        // console.log(data);
         return data;
     }
     catch(err)
