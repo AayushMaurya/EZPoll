@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const createPoll = async (pollInfo) => {
     try {
+        console.log("sending data: ", pollInfo);
         const { data } = await axios.post("https://ezserver.herokuapp.com/api/poll/create", pollInfo);
         console.log(data);
         return data;
