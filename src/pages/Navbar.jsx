@@ -17,6 +17,9 @@ export default function Navbar() {
     dispatch(clientLogout());
     navigate("/");
   };
+  const dashboardHandler = () => {
+    navigate("/dash");
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light ">
@@ -60,14 +63,20 @@ export default function Navbar() {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1" className="dropBtn">
+                  <Dropdown.Item className="dropBtn">
                     <div className="container">
                       <div className="row clientDetails">
                             <h5 className="clientName">Hi ! {store.client.client.name}</h5>
                             <h8 className="clientEmail">{store.client.client.email}</h8>
                             <Link to="/client" className="clientLink"><h4 className="clientId">@{store.client.client.registrationNumber}</h4></Link>
-
-                        <button onClick={logoutHandler} type="button" className="loginBtn">Logout</button>
+                        <div className="row">
+                          <div className="col-6">
+                            <button onClick={logoutHandler} type="button" className="btn1 loginBtn">Logout</button>
+                          </div>
+                          <div className="col-6">
+                            <button onClick={dashboardHandler} type="button" className="btn2 loginBtn">Dashboard</button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </Dropdown.Item>

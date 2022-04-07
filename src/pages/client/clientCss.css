@@ -32,6 +32,7 @@
     text-align: center;
     padding: 10px;
     margin: 10px;
+    width: 20vw;
 }
 
 .clientDetails::after{
@@ -62,6 +63,11 @@
     text-decoration: none;
 }
 
+.noneBtn{
+    border: none;
+    background-color: transparent;
+}
+
 .inp{
     margin: auto;
     margin-top: 10px;
@@ -75,14 +81,14 @@
 .loginBtn{
     margin: auto;
     margin-top: 20px;
-    font-size: 18px;
+    font-size: 18px !important;
     background-color: #9dcff6;
-    width: 40%;
+    width: 8vw !important;
     font-weight: 400;
     color: white;
     border: 3px solid #9dcff6;
     border-radius: 5px;
-    padding: 5px;
+    padding: 5px !important;
 }
 
   .loginBtn:hover {
