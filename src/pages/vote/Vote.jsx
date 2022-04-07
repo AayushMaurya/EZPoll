@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getVoteInfo } from "../../apis/voteApi";
 import { useNavigate } from "react-router";
+import { giveVote } from "../../apis/voterApi";
+import Popup from "./Popup";
+import { voterLogout } from "../../redux/actions/voterAction";
+import { useDispatch } from "react-redux";
 
 const Vote = () => {
     const { id } = useParams();
@@ -12,6 +16,9 @@ const Vote = () => {
         position_id: "",
         choice_id: ""
     });
+    const [isLoading, setIsLoading] = useState(false);
+    const [isPopup, setIsPopup] = useState(false);
+    const dispatch = useDispatch();
 
     // fetch the vote info on loading the page
     useEffect(async() => {
@@ -39,11 +46,28 @@ const Vote = () => {
         });
     }
 
-    const formHandler = (e) => {
+    const formHandler = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         console.log("now the vote is being submitted");
         console.log("user chocice : ", userChoice);
+
+        const data = await giveVote(userChoice);
+        if(data.success)
+        {
+            alert(data.message);
+            if(data.message === "Already voted"){
+                dispatch(voterLogout());
+                navigate("/");
+            }
+            setIsPopup(true);
+            setIsLoading(false);
+        }
+        else{
+            alert(data.message);
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -72,10 +96,11 @@ const Vote = () => {
                             <input type="radio" name="choice" value={candidate._id} onChange={changeHandler}/>
                         </div>
                     )}
-                    <button type="submit">Vote</button>
+                    {!isLoading && <button type="submit">Vote</button>}
                 </form>
                 </div>
             </div>}
+            {isPopup && <Popup handleClose={() => setIsPopup(false)} choice_id={userChoice.choice_id} position_id={userChoice.position_id} />}
         </>
     )
 }

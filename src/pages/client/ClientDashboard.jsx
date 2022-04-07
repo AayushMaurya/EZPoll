@@ -20,7 +20,14 @@ const ClientDashboard = () => {
       setIsLoading(true);
     }
   }, []);
-  const data = getAllPolls();
+
+  const seeResult = (poll_id) => {
+      console.log("result for poll id: ", poll_id);
+      const url = "/pollResult/" + poll_id;
+      navigate(url)
+  }
+
+//   const data = getAllPolls();
   return (
     <>
       {isLoading ? (
@@ -37,7 +44,7 @@ const ClientDashboard = () => {
                     poll name: {poll.title}
                   </div>
                   <div className="col">
-                      <button className="noneBtn">
+                      <button type="button" className="noneBtn" onClick={() => {seeResult(poll.poll_id)}}>
                         <FaPoll size="25" />
                       </button>
                   </div>
