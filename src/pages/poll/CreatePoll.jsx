@@ -16,7 +16,7 @@ const CreatePoll = () => {
   // });
   const [pollInfo, setPollInfo] = useState({
     title: "",
-    description: "",
+    description: ""
   });
   const [choices, setChoices] = useState([
     { choiceNo: "", choiceValue: "" },
@@ -29,6 +29,7 @@ const CreatePoll = () => {
   const store = useSelector((store) => store);
   const [ULR, setULR] = useState("");
   const [show, setShow] = useState(false);
+  const [exp, setExp] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -68,6 +69,7 @@ const CreatePoll = () => {
     formData.append("title", pollInfo.title);
     formData.append("description", pollInfo.description);
     formData.append("choices", choices);
+    formData.append("exp", exp);
 
     var data = await createPoll(formData);
 
@@ -170,33 +172,13 @@ const CreatePoll = () => {
                     -
                   </button>
                 </div>
-                {/* <input
-                  type="text"
-                  className="formInp"
-                  name="choice1"
-                  required
-                  value={pollinfo.choice1}
-                  onChange={changeHandler}
-                  placeholder="Option 1 "
-                />
+                <br />
+                <h4 className="formEle">Exp Data</h4>
                 <input
-                  type="text"
-                  className="formInp"
-                  name="choice2"
-                  required
-                  value={pollinfo.choice2}
-                  onChange={changeHandler}
-                  placeholder="Option 2 "
+                  type="date" className="formInp"
+                  name="exp" value={pollInfo.exp}
+                  onChange={(e) => setExp(e.target.value)} 
                 />
-                <input
-                  type="text"
-                  className="formInp"
-                  name="choice3"
-                  required
-                  value={pollinfo.choice3}
-                  onChange={changeHandler}
-                  placeholder="Option 3 "
-                /> */}
                 <div className="row crBtn">
                   {!isLoading && (
                     <button type="submit" className="createbtn">
