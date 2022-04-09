@@ -13,9 +13,8 @@ const Poll = () => {
   const [isPoll, setIsPoll] = useState(false);
   const navigate = useNavigate();
   const [userChoice, setUserChoice] = useState({
-    // poll_id: id, ye backup hai
-    _id: "",
-    choice: "",
+    poll_id: "",
+    choice_id: ""
   });
   const [loadinSubmit, setLoadingSubmit] = useState(false);
   const [ULR, setULR] = useState("");
@@ -34,8 +33,7 @@ const Poll = () => {
       setIsPoll(true);
       setUserChoice({
         ...userChoice,
-        poll_id: id,
-        _id: pollinfo._id,
+        poll_id: id
       });
     } else {
       alert(data.message);
@@ -46,13 +44,11 @@ const Poll = () => {
   }, []);
 
   const changeHandler = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-
     setUserChoice({
       ...userChoice,
-      [name]: value,
+      choice_id: e.target.value
     });
+    console.log("useChoice: ", userChoice);
   };
   const copyToClipboard = (e) => {
     navigator.clipboard.writeText(window.location.toString());
@@ -97,7 +93,24 @@ const Poll = () => {
               <h3 className="pollChoices">Choices </h3>
               <form onSubmit={formHandler}>
                 <div className="row">
-                  <div className="row">
+                {pollinfo.choices.map((c, index) => (
+                  <div className="row" key={index}>
+                    <div className="col-1">
+                      <input
+                        type="radio"
+                        name="choice"
+                        value={c._id}
+                        id="choice1"
+                        className="choice"
+                        onChange={changeHandler}
+                      />
+                    </div>
+                    <div className="col">
+                      <label for="choice1">{c.choiceValue}</label>
+                    </div>
+                  </div>
+                ))}
+                  {/* <div className="row">
                     <div className="col-1">
                       <input
                         type="radio"
@@ -141,7 +154,7 @@ const Poll = () => {
                     <div className="col">
                       <label for="choice3">{pollinfo.choice3}</label>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row pollsubbtn">
                   {!loadinSubmit && (

@@ -16,7 +16,9 @@ const CreatePoll = () => {
   // });
   const [pollInfo, setPollInfo] = useState({
     title: "",
-    description: ""
+    description: "",
+    exp: "",
+    choices: []
   });
   const [choices, setChoices] = useState([
     { choiceNo: "", choiceValue: "" },
@@ -29,7 +31,7 @@ const CreatePoll = () => {
   const store = useSelector((store) => store);
   const [ULR, setULR] = useState("");
   const [show, setShow] = useState(false);
-  const [exp, setExp] = useState(null);
+  // const [exp, setExp] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -56,6 +58,12 @@ const CreatePoll = () => {
     values[index].choiceNo = e.target.name;
     values[index].choiceValue = e.target.value;
     setChoices(values);
+
+    setPollInfo({
+      ...pollInfo,
+      choices: choices
+    });
+
   };
 
   const formHandler = async (e) => {
@@ -64,14 +72,7 @@ const CreatePoll = () => {
 
     console.log("choices: ", choices);
 
-    const formData = new FormData();
-
-    formData.append("title", pollInfo.title);
-    formData.append("description", pollInfo.description);
-    formData.append("choices", choices);
-    formData.append("exp", exp);
-
-    var data = await createPoll(formData);
+    var data = await createPoll(pollInfo);
 
     if (data.success) {
       alert("Poll successfully created");
@@ -177,7 +178,7 @@ const CreatePoll = () => {
                 <input
                   type="date" className="formInp"
                   name="exp" value={pollInfo.exp}
-                  onChange={(e) => setExp(e.target.value)} 
+                  onChange={changeHandler1} 
                 />
                 <div className="row crBtn">
                   {!isLoading && (
@@ -214,6 +215,11 @@ const CreatePoll = () => {
             <div className="row">
               <h4 className="creatdC">{pollinfo.choice3}</h4>
             </div> */}
+            {pollInfo.choices.map((c, index) => (
+              <div key={index} className="row ">
+              <h4 className="creatdC">{c.choiceValue}</h4>
+              </div>
+            ))}
             <div className="row createdFooter">
               <h4 className="createdL">Poll Link</h4>
               <div className="row crL">
