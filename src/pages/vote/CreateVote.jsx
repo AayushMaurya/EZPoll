@@ -136,6 +136,7 @@ const CreateVote = () => {
 
     const formData = new FormData();
     formData.append("excel", voterList);
+    formData.append("position_id", voteId);
 
     const data = await addVoters(formData);
     if (data.success) {
