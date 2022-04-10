@@ -21,6 +21,7 @@ const CreateVote = () => {
   const [voteId, setVoteId] = useState();
   const [voterList, setVoterList] = useState(null);
   const dispatch = useDispatch();
+  const [allCandidates, setAllCandidate] = useState([]);
   const store = useSelector((store) => store);
 
   // check if there is already a vote
@@ -94,6 +95,15 @@ const CreateVote = () => {
     // console.log("token: ", token);
   };
 
+  const insertCandidate = () => {
+    setAllCandidate([...allCandidates, {name: name, partyName: partyName}]);
+    setName("");
+    setEmail("");
+    setPartyName("");
+    setPhone(null);
+    // setProfile(null);
+  }
+
   // submit candidate details
   const formHandler2 = async (e) => {
     e.preventDefault();
@@ -111,6 +121,8 @@ const CreateVote = () => {
     if (data.success) {
       console.log("success:", data);
       setIsLoading(false);
+      insertCandidate();
+      alert("Candidate added");
     } else {
       alert(data.message);
       setIsLoading(false);
@@ -303,6 +315,11 @@ const CreateVote = () => {
                 </div>
               </div>
             </form>
+            {allCandidates.map((candidate, index) => (
+              <div key={index}>
+                {candidate.name}: {candidate.partyName}
+              </div>
+            ))}
           </div>
         </div>
       )}

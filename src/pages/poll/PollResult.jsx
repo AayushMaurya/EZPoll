@@ -34,7 +34,12 @@ const PollResult = () => {
           <div>Loading Result: {id}</div>
         ) : (
           <div className="row pollRes mx-1 my-2">
-            <div className="row">
+          {pollInfo.choices.map((choice, index) => (
+            <div key={index} className="row">
+              {choice.choiceValue}: {choice.count}
+            </div>
+          ))}
+            {/* <div className="row">
               {pollInfo.choice1} : {pollInfo.choice1Vote}
             </div>
             <div className="row">
@@ -42,7 +47,7 @@ const PollResult = () => {
             </div>
             <div className="row">
               {pollInfo.choice3} : {pollInfo.choice3Vote}
-            </div>
+            </div> */}
           </div>
         )}
       </div>
