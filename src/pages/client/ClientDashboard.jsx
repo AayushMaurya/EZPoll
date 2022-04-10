@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllPolls } from "../../apis/clientApi";
 import { useNavigate } from "react-router";
 import { FaPoll } from "react-icons/fa";
+import { deletePoll } from "../../apis/clientApi";
 
 const ClientDashboard = () => {
   const [allPoll, setAllPoll] = useState([]);
@@ -27,6 +28,23 @@ const ClientDashboard = () => {
       navigate(url)
   }
 
+  // to delete a poll
+  const deletepoll = async (poll_id) => {
+    console.log("poll to be deleted: ", poll_id);
+    const data = await deletePoll(poll_id);
+    console.log(data);
+    if(data.success){
+      console.log(data.message);
+      // refresh page
+      // window.location.reload(false);
+      const data1 = await getAllPolls();
+      if(data.success)
+        setAllPoll(data1.result);
+    }
+    else
+      alert(data.message);
+  }
+
 //   const data = getAllPolls();
   return (
     <>
@@ -42,6 +60,9 @@ const ClientDashboard = () => {
               <div className="row my-2">
                   <div className="col">
                     poll name: {poll.title}
+                  </div>
+                  <div className="col" >
+                    <button type="button" onClick={() => {deletepoll(poll._id)}}>delete</button>
                   </div>
                   <div className="col">
                       <button type="button" className="noneBtn" onClick={() => {seeResult(poll.poll_id)}}>
