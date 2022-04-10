@@ -110,7 +110,7 @@ function App() {
           <Route exact path="/polls" element={<OngoingPolls />} />
           <Route exact path="/dash" element={<ClientDashboard />} />
           <Route exact path="/createVote" element={<CreateVote />} />
-          <Route exact path="/voterLogin" element={<VoterLogin />} />
+          <Route exact path="/voterLogin/:id" element={<VoterLogin />} />
           <Route exact path="/voterHome" element={<VoterHome />} />
           <Route exact path="/vote/:id" element={<Vote />} />
         </Routes>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { checkVoterLoginData } from "../../apis/voterApi";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setVoter } from "../../redux/actions/voterAction";
 import { decodeToken } from "../../utils/decodeToken";
 
 const VoterLogin = () => {
+  const { id } = useParams();
+
   const [voterLoginInfo, setVoterLoginInfo] = useState({
     username: "",
     password: "",
@@ -17,7 +19,7 @@ const VoterLogin = () => {
 
   useEffect(() => {
     if (store.voter.isAuthenticated) {
-      navigate("/voterHome");
+      navigate(`/vote/${id}`)
     }
   });
 
