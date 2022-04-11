@@ -48,3 +48,17 @@ export const getAllPolls = async () => {
         }
     }
 }
+
+export const deletePoll = async (poll_id) => {
+    try{
+        const { data } = await axios.get(`https://ezserver.herokuapp.com/api/poll/delete/${poll_id}`);
+        return data;
+    }
+    catch(err) {
+        console.log(err);
+        return {
+            success: false,
+            message: "cannot delete poll at this moment"
+        }
+    }
+}

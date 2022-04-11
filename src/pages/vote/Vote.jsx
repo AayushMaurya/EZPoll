@@ -6,6 +6,7 @@ import { giveVote } from "../../apis/voterApi";
 import Popup from "./Popup";
 import { voterLogout } from "../../redux/actions/voterAction";
 import { useDispatch } from "react-redux";
+import { Helmet } from "react-helmet";
 
 const Vote = () => {
     const { id } = useParams();
@@ -72,6 +73,9 @@ const Vote = () => {
 
     return (
         <>
+        <Helmet>
+      <title>Vote • EZPoll</title>
+    </Helmet>
             {!isVote && <h2>Loading poll: {id} ...</h2>}
             {isVote && <div>
                 <div>Position: {voteInfo.position[0].name}</div>

@@ -4,6 +4,7 @@ import { createVote, addCandidate, addVoters } from "../../apis/voteApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosition, setstep } from "../../redux/actions/createVoteAction";
 import { decodeToken } from "../../utils/decodeToken";
+import { Helmet } from "react-helmet"
 
 const CreateVote = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const CreateVote = () => {
   const [voteId, setVoteId] = useState();
   const [voterList, setVoterList] = useState(null);
   const dispatch = useDispatch();
+  const [allCandidates, setAllCandidate] = useState([]);
   const store = useSelector((store) => store);
 
   // check if there is already a vote
@@ -91,6 +93,15 @@ const CreateVote = () => {
     // console.log("token: ", token);
   };
 
+  const insertCandidate = () => {
+    setAllCandidate([...allCandidates, {name: name, partyName: partyName}]);
+    setName("");
+    setEmail("");
+    setPartyName("");
+    setPhone(null);
+    // setProfile(null);
+  }
+
   // submit candidate details
   const formHandler2 = async (e) => {
     e.preventDefault();
@@ -108,6 +119,8 @@ const CreateVote = () => {
     if (data.success) {
       console.log("success:", data);
       setIsLoading(false);
+      insertCandidate();
+      alert("Candidate added");
     } else {
       alert(data.message);
       setIsLoading(false);
@@ -121,6 +134,7 @@ const CreateVote = () => {
 
     const formData = new FormData();
     formData.append("excel", voterList);
+    formData.append("position_id", voteId);
 
     const data = await addVoters(formData);
     if (data.success) {
@@ -141,6 +155,9 @@ const CreateVote = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Vote • EZPoll</title>
+    </Helmet>
       {step === 1 && (
         <div className="container stp1">
           <div className="row">
@@ -314,6 +331,11 @@ const CreateVote = () => {
                 </div>
               </div>
             </form>
+            {allCandidates.map((candidate, index) => (
+              <div key={index}>
+                {candidate.name}: {candidate.partyName}
+              </div>
+            ))}
           </div>
         </div>
       )}

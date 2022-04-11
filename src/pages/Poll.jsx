@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
 import QRCode from "qrcode.react";
+import Helmet from "react-helmet";
 
 const Poll = () => {
   const { id } = useParams();
@@ -81,6 +82,9 @@ const Poll = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Poll</title>
+    </Helmet>
       {!isPoll && <h1> Loading poll {id} ...</h1>}
       {isPoll && (
         <div>

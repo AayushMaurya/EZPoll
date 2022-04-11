@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet"
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminHome from "./pages/admin/AdminHome";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -93,6 +94,9 @@ function App() {
   return (
     <div>
       <Router>
+      <Helmet>
+        <title>EZPoll</title>
+      </Helmet>
         <Navbar />
         <Routes>
           <Route exact path='/' element={<Homepage />} />
@@ -110,7 +114,7 @@ function App() {
           <Route exact path="/polls" element={<OngoingPolls />} />
           <Route exact path="/dash" element={<ClientDashboard />} />
           <Route exact path="/createVote" element={<CreateVote />} />
-          <Route exact path="/voterLogin" element={<VoterLogin />} />
+          <Route exact path="/voterLogin/:id" element={<VoterLogin />} />
           <Route exact path="/voterHome" element={<VoterHome />} />
           <Route exact path="/vote/:id" element={<Vote />} />
         </Routes>

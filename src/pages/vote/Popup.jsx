@@ -14,7 +14,7 @@ const Popup = props => {
         setOtp(e.target.value);
     }
 
-    const submitOpt = async() => {
+    const submitOtp = async() => {
         console.log("submitting otp");
         const formData = {
             choice_id: props.choice_id,
@@ -39,10 +39,10 @@ const Popup = props => {
   return (
     <div className="popup-box">
       <div className="box">
-        <h2>Enter your opt</h2>
+        <h2>Enter your otp</h2>
         <input type="text" value={otp} onChange={formHandler} />
         <br />  
-        <button onClick={submitOpt} >submit</button>
+        <button onClick={submitOtp} >submit</button>
         <span className="close-icon" onClick={props.handleClose}>x</span>
       </div>
     </div>

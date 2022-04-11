@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { checkVoterLoginData } from "../../apis/voterApi";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setVoter } from "../../redux/actions/voterAction";
 import { decodeToken } from "../../utils/decodeToken";
+import { Helmet } from "react-helmet";
 
 const VoterLogin = () => {
+  const { id } = useParams();
+
   const [voterLoginInfo, setVoterLoginInfo] = useState({
     username: "",
     password: "",
@@ -17,7 +20,7 @@ const VoterLogin = () => {
 
   useEffect(() => {
     if (store.voter.isAuthenticated) {
-      navigate("/voterHome");
+      navigate(`/vote/${id}`)
     }
   });
 
@@ -50,6 +53,9 @@ const VoterLogin = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Vote • EZPoll</title>
+    </Helmet>
       <div className="container loginForm">
         <div className="row formBody">
           <div className="row">
