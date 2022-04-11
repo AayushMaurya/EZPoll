@@ -25,11 +25,10 @@ const CreateVote = () => {
 
   // check if there is already a vote
   useEffect(() => {
-      if(store.createVote.isThere)
-      {
-          setStep(store.createVote.step);
-          setVoteInfo(store.createVote.position);
-      }
+    if (store.createVote.isThere) {
+      setStep(store.createVote.step);
+      setVoteInfo(store.createVote.position);
+    }
   });
 
   // handle avatar
@@ -75,14 +74,12 @@ const CreateVote = () => {
 
       alert("vote successfully created");
       setIsLoading(false);
-      try{
-      const token = decodeToken(store.createVote);
-      localStorage.setItem('createVoteJwtToken', token);
-      }
-      catch(err){
+      try {
+        const token = decodeToken(store.createVote);
+        localStorage.setItem("createVoteJwtToken", token);
+      } catch (err) {
         console.log(err);
       }
-
     } else {
       setIsLoading(false);
       alert(data.message);
@@ -201,11 +198,25 @@ const CreateVote = () => {
             <h2 className="stp">Step 2 of 3</h2>
           </div>
 
-          <div className="row">
-            <h4 className="posD">Position {voteInfo.name}</h4>
-            <h4 className="posD">Description {voteInfo.description}</h4>
+          <div className="row my-1">
+            <div className="row">
+              <div className="col-4">
+                <h4 className="posD">Position </h4>
+              </div>
+              <div className="col">
+                <h4 className="posD"> {voteInfo.name}</h4>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-4">
+                <h4 className="posD">Description </h4>
+              </div>
+              <div className="col">
+                <h4 className="posD"> {voteInfo.description}</h4>
+              </div>
+            </div>
           </div>
-          <div className="row">
+          <div className="row my-2">
             <h4 className="stpD">Enter details of the Candidate</h4>
           </div>
           <div className="row">
