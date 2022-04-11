@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getPollInfo } from "../../apis/pollApi";
 import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet";
 
 const PollResult = () => {
   const { id } = useParams();
@@ -26,6 +27,9 @@ const PollResult = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Result • EZPoll</title>
+    </Helmet>
       <div className="container my-4">
           <div className="row">
               <h4 className="stp">Poll Results</h4>

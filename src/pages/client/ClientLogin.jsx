@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { checkClientLoginData } from "../../apis/clientApi";
 import { Link } from "react-router-dom";
 import "./clientCss.css";
+import { Helmet } from "react-helmet"
 
 const ClientLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -52,6 +53,9 @@ const ClientLogin = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Login • EZPoll</title>
+    </Helmet>
       <div className="container loginForm">
         <div className="row formBody">
           <div className="row">

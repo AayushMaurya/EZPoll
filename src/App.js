@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet"
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminHome from "./pages/admin/AdminHome";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -93,6 +94,9 @@ function App() {
   return (
     <div>
       <Router>
+      <Helmet>
+        <title>EZPoll</title>
+      </Helmet>
         <Navbar />
         <Routes>
           <Route exact path='/' element={<Homepage />} />

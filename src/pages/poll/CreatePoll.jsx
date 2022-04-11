@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import QRCode from "qrcode.react";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
+import { Helmet } from "react-helmet"
 
 const CreatePoll = () => {
   // const [pollinfo, setPollInfo] = useState({
@@ -109,6 +110,9 @@ const CreatePoll = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Poll • EZPoll</title>
+    </Helmet>
       {!isCreated && (
         <div>
           <div className="container createForm">

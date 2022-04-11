@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setVoter } from "../../redux/actions/voterAction";
 import { decodeToken } from "../../utils/decodeToken";
+import { Helmet } from "react-helmet";
 
 const VoterLogin = () => {
   const { id } = useParams();
@@ -52,6 +53,9 @@ const VoterLogin = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Vote • EZPoll</title>
+    </Helmet>
       <div className="container loginForm">
         <div className="row formBody">
           <div className="row">

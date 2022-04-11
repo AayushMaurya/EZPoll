@@ -6,6 +6,7 @@ import { addNewClient, checkClientLoginData } from "../../apis/clientApi";
 import { setClient } from "../../redux/actions/clientAction";
 import { Link } from "react-router-dom";
 import './clientCss.css';
+import { Helmet } from "react-helmet"
 
 const ClientSignup = () => {
   const [signupInfo, setSignupInfo] = useState({
@@ -66,6 +67,9 @@ const ClientSignup = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Signup • EZPoll</title>
+    </Helmet>
       <div className="container loginForm">
         <div className="row formBody">
           <div className="row">

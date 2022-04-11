@@ -3,6 +3,7 @@ import { getAllPolls } from "../../apis/clientApi";
 import { useNavigate } from "react-router";
 import { FaPoll } from "react-icons/fa";
 import { deletePoll } from "../../apis/clientApi";
+import Helmet from "react-helmet";
 
 const ClientDashboard = () => {
   const [allPoll, setAllPoll] = useState([]);
@@ -48,6 +49,9 @@ const ClientDashboard = () => {
 //   const data = getAllPolls();
   return (
     <>
+    <Helmet>
+      <title>Dash • EZPoll</title>
+    </Helmet>
       {isLoading ? (
         <div>Loading Dashboard ...</div>
       ) : (

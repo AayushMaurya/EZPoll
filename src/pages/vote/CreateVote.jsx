@@ -4,6 +4,7 @@ import { createVote, addCandidate, addVoters } from "../../apis/voteApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosition, setstep } from "../../redux/actions/createVoteAction";
 import { decodeToken } from "../../utils/decodeToken";
+import { Helmet } from "react-helmet"
 
 const CreateVote = () => {
   const navigate = useNavigate();
@@ -157,6 +158,9 @@ const CreateVote = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Vote • EZPoll</title>
+    </Helmet>
       {step === 1 && (
         <div className="container stp1">
           <div className="row">
