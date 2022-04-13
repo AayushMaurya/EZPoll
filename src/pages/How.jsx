@@ -13,7 +13,7 @@ export default function How() {
           <h2 className="howSubtitle">New to EZPoll? No problem.</h2>
         </div>
         <div className="row ">
-          <h4 className="howExp">
+          <h4 className="howExp ">
             We have designed our poll maker to be as easy and intuitive to use
             as possible. At the same time, we are constantly optimizing the
             workflow of creating polls on <span className="spanEZ">EZPoll</span>

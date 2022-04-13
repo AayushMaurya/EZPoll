@@ -132,8 +132,16 @@
     .formBody{
         width: 100%;
     }
+    .clientSac{
+        /* background-color: aqua; */
+        padding: 0px;
+        margin: 0;
+        width: 100%;
+    }
     .clientDetails {
           width: 72vw;
+          /* background-color: #7255e8; */
+          padding: 0px; 
           /* background-color: #68e5b2; */
       }
     }
