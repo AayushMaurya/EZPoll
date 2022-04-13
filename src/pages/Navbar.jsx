@@ -1,4 +1,5 @@
 import React from "react";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import "./index.css";
 import "../images/bg.png";
@@ -13,6 +14,7 @@ export default function Navbar() {
   const store = useSelector((store) => store);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const menuToggle = document.getElementById("navbarSupportedContent");
   const logoutHandler = () => {
     dispatch(clientLogout());
     navigate("/");
@@ -20,6 +22,11 @@ export default function Navbar() {
   const dashboardHandler = () => {
     navigate("/dash");
   };
+
+  const navCollapse = () => {
+    menuToggle.toggle();
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light ">
@@ -39,61 +46,99 @@ export default function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul
+              className="navbar-nav me-auto mb-2 mb-lg-0"
+              onClick={() =>
+                document.getElementsByClassName("navbar-toggler")[0].click()
+              }
+            >
               {/* <Link to="/create" className='navLinks'><li className="nav-link text-dark">Create a Poll</li></Link> */}
               <Link to="/CreatePoll" className="navLinks">
-                <li className="nav-link text-dark">Create Poll</li>
+                <li className="nav-link text-dark" >
+                  Create Poll
+                </li>
               </Link>
               <Link to="/CreateVote" className="navLinks">
-                <li className="nav-link text-dark">Voting Section</li>
+                <li className="nav-link text-dark" >
+                  Voting Section
+                </li>
               </Link>
               <Link to="/Polls" className="navLinks">
-                <li className="nav-link text-dark">Ongoing Polls</li>
+                <li className="nav-link text-dark" >
+                  Ongoing Polls
+                </li>
               </Link>
               <Link to="./how" className="navLinks">
-                <li className="nav-link text-dark">How it Works</li>
+                <li className="nav-link text-dark" >
+                  How it Works
+                </li>
               </Link>
             </ul>
-          </div>
-          <div>
-            {store.client.isAuthenticated ? (
-              <Dropdown>
-                <Dropdown.Toggle variant="light" id="dropdown-basic" >
-                  <FaUserCircle size="35" />
-                </Dropdown.Toggle>
+            <div className="usrRow">
+              <div className="usrBtn">
+                {store.client.isAuthenticated ? (
+                  <Dropdown>
+                    <Dropdown.Toggle variant="light" id="dropdown-basic">
+                      <FaUserCircle className="usrCrl" size="35" />
+                    </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  <Dropdown.Item className="dropBtn">
-                    <div className="container">
-                      <div className="row clientDetails">
-                            <h5 className="clientName">Hi ! {store.client.client.name}</h5>
-                            <h8 className="clientEmail">{store.client.client.email}</h8>
-                            <Link to="/client" className="clientLink"><h4 className="clientId">@{store.client.client.registrationNumber}</h4></Link>
-                        <div className="row">
-                          <div className="col-6">
-                            <button onClick={logoutHandler} type="button" className="btn1 loginBtn">Logout</button>
-                          </div>
-                          <div className="col-6">
-                            <button onClick={dashboardHandler} type="button" className="btn2 loginBtn">Dashboard</button>
+                    <Dropdown.Menu>
+                      <Dropdown.Item className="dropBtn">
+                        <div className="container">
+                          <div className="row clientDetails">
+                            <h5 className="clientName">
+                              Hi ! {store.client.client.name}
+                            </h5>
+                            <h8 className="clientEmail">
+                              {store.client.client.email}
+                            </h8>
+                            <Link to="/client" className="clientLink">
+                              <h4 className="clientId">
+                                @{store.client.client.registrationNumber}
+                              </h4>
+                            </Link>
+                            <div className="row">
+                              <div className="col-6">
+                                <button
+                                  onClick={logoutHandler}
+                                  type="button"
+                                  className="btn1 loginBtn"
+                                >
+                                  Logout
+                                </button>
+                              </div>
+                              <div className="col-6">
+                                <button
+                                  onClick={dashboardHandler}
+                                  type="button"
+                                  className="btn2 loginBtn"
+                                >
+                                  Dashboard
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            ) : (
-              <div className="d-flex justify-content-end signBox">
-                <Link to="/clientLogin" className="signLink mx-3">
-                  <div className="text-dark">Login</div>
-                </Link>
-                <Link to="/clientSignup" className="signLink signUpLink mx-3">
-                  <div className="">Signup</div>
-                </Link>
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                ) : (
+                  <div className="d-flex justify-content-end signBox">
+                    <Link to="/clientLogin" className="signLink mx-3">
+                      <div className="text-dark">Login</div>
+                    </Link>
+                    <Link
+                      to="/clientSignup"
+                      className="signLink signUpLink mx-3"
+                    >
+                      <div className="">Signup</div>
+                    </Link>
+                  </div>
+                )}
+                {/* <div class="signLink mx-3">Signin</div>
+            <div class="signLink signUpLink mx-3">Signup</div> */}
               </div>
-            )}
-            {/* <div class="signLink mx-3">Signin</div>
-          <div class="signLink signUpLink mx-3">Signup</div> */}
+            </div>
           </div>
         </div>
       </nav>

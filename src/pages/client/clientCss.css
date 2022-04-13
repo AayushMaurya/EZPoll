@@ -5,7 +5,7 @@
     width: 50%;
     margin: auto;
     text-align: center;
-    margin-top: 5%;
+    margin-top: 10%;
 }
 
 .formBody{
@@ -30,10 +30,11 @@
 
 .clientDetails{
     text-align: center;
-    padding: 10px;
-    margin: 10px;
+    padding: 0.8rem;
+    margin: 0.8rem;
     width: 20vw;
 }
+
 
 .clientDetails::after{
     background-color: transparent;
@@ -123,5 +124,16 @@
   }
 
 
-  /* client Home */
-
+  @media only screen and (max-width: 600px) {
+    .loginForm{
+        margin-top: 40%;
+        width: 80%;
+    }  
+    .formBody{
+        width: 100%;
+    }
+    .clientDetails {
+          width: 72vw;
+          /* background-color: #68e5b2; */
+      }
+    }

@@ -15,7 +15,7 @@ const Poll = () => {
   const navigate = useNavigate();
   const [userChoice, setUserChoice] = useState({
     poll_id: "",
-    choice_id: ""
+    choice_id: "",
   });
   const [loadinSubmit, setLoadingSubmit] = useState(false);
   const [ULR, setULR] = useState("");
@@ -34,7 +34,7 @@ const Poll = () => {
       setIsPoll(true);
       setUserChoice({
         ...userChoice,
-        poll_id: id
+        poll_id: id,
       });
     } else {
       alert(data.message);
@@ -47,7 +47,7 @@ const Poll = () => {
   const changeHandler = (e) => {
     setUserChoice({
       ...userChoice,
-      choice_id: e.target.value
+      choice_id: e.target.value,
     });
     console.log("useChoice: ", userChoice);
   };
@@ -97,68 +97,23 @@ const Poll = () => {
               <h3 className="pollChoices">Choices </h3>
               <form onSubmit={formHandler}>
                 <div className="row">
-                {pollinfo.choices.map((c, index) => (
-                  <div className="row" key={index}>
-                    <div className="col-1">
-                      <input
-                        type="radio"
-                        name="choice"
-                        value={c._id}
-                        id="choice1"
-                        className="choice"
-                        onChange={changeHandler}
-                      />
+                  {pollinfo.choices.map((c, index) => (
+                    <div className="row" key={index}>
+                      <div className="col-1">
+                        <input
+                          type="radio"
+                          name="choice"
+                          value={c._id}
+                          id="choice1"
+                          className="choice"
+                          onChange={changeHandler}
+                        />
+                      </div>
+                      <div className="col">
+                        <label for="choice1">{c.choiceValue}</label>
+                      </div>
                     </div>
-                    <div className="col">
-                      <label for="choice1">{c.choiceValue}</label>
-                    </div>
-                  </div>
-                ))}
-                  {/* <div className="row">
-                    <div className="col-1">
-                      <input
-                        type="radio"
-                        name="choice"
-                        value="choice1"
-                        id="choice1"
-                        className="choice"
-                        onChange={changeHandler}
-                      />
-                    </div>
-                    <div className="col">
-                      <label for="choice1">{pollinfo.choice1}</label>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-1">
-                      <input
-                        type="radio"
-                        name="choice"
-                        value="choice2"
-                        id="choice2"
-                        className="choice"
-                        onChange={changeHandler}
-                      />
-                    </div>
-                    <div className="col">
-                      <label for="choice2">{pollinfo.choice2}</label>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-1">
-                      <input
-                        type="radio"
-                        name="choice"
-                        value="choice3"
-                        id="choice3"
-                        className="choice"
-                        onChange={changeHandler}
-                      />
-                    </div>
-                    <div className="col">
-                      <label for="choice3">{pollinfo.choice3}</label>
-                    </div>
-                  </div> */}
+                  ))}
                 </div>
                 <div className="row pollsubbtn">
                   {!loadinSubmit && (

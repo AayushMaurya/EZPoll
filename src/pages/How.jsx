@@ -5,7 +5,7 @@ import "./index.css";
 export default function How() {
   return (
     <div>
-      <div className="container my-5 how">
+      <div className="container how">
         <div className="row ">
           <h3 className="howTitle"> HOW IT WORKS</h3>
         </div>
