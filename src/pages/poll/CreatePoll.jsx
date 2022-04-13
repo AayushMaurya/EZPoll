@@ -164,7 +164,7 @@ const CreatePoll = () => {
                 <div className="row addBtnRow">
                   <button
                     type="button"
-                    className="col addBtn btn3"
+                    className="col btn3 addBtn"
                     onClick={addChoice}
                   >
                     +

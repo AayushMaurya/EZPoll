@@ -200,7 +200,7 @@ const CreateVote = () => {
               </div>
               <div className="row">
                 {!isLoading && (
-                  <button type="submit" className="btn3 mx-2">
+                  <button type="submit" className="btn3 mx-2 ">
                     Create
                   </button>
                 )}
@@ -324,8 +324,8 @@ const CreateVote = () => {
                     </button>
                   )}
                 </div>
-                <div className="col-1">
-                  <button className="btn4" onClick={next}>
+                <div className="col-3">
+                  <button className="btn4 nxtBtn" onClick={next}>
                     Next
                   </button>
                 </div>
@@ -370,7 +370,7 @@ const CreateVote = () => {
                   </button>
                 )}
               </div>
-              <div className="col-1">
+              <div className="col-3">
                 <button className="btn4" onClick={back}>
                   Back
                 </button>
