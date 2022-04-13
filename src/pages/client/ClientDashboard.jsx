@@ -3,12 +3,15 @@ import { getAllPolls } from "../../apis/clientApi";
 import { useNavigate } from "react-router";
 import { FaPoll } from "react-icons/fa";
 import { deletePoll } from "../../apis/clientApi";
+import SharePoll from "./SharePoll";
 import Helmet from "react-helmet";
 
 const ClientDashboard = () => {
   const [allPoll, setAllPoll] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const [isPopup, setIsPopup] = useState(false);
+  const [share_id, setShare_id] = useState("");
   useEffect(async () => {
     const data = await getAllPolls();
     console.log("data: ", data);
@@ -36,14 +39,19 @@ const ClientDashboard = () => {
     console.log(data);
     if(data.success){
       console.log(data.message);
-      // refresh page
-      // window.location.reload(false);
+      
       const data1 = await getAllPolls();
       if(data.success)
         setAllPoll(data1.result);
     }
     else
       alert(data.message);
+  }
+
+  // to share the poll
+  const share = (share_id) => {
+    setShare_id(share_id);
+    setIsPopup(true);
   }
 
 //   const data = getAllPolls();
@@ -69,6 +77,9 @@ const ClientDashboard = () => {
                     <button type="button" onClick={() => {deletepoll(poll._id)}}>delete</button>
                   </div>
                   <div className="col">
+                    <button type="button" onClick={() => {share(poll.poll_id)}}>share</button>
+                  </div>
+                  <div className="col">
                       <button type="button" className="noneBtn" onClick={() => {seeResult(poll.poll_id)}}>
                         <FaPoll size="25" />
                       </button>
@@ -79,6 +90,7 @@ const ClientDashboard = () => {
           ))}
         </div>
       )}
+      {isPopup && <SharePoll handleClose={() => setIsPopup(false)} share_id={share_id} />}
     </>
   );
 };

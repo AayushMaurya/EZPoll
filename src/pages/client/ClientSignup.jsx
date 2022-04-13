@@ -12,7 +12,7 @@ const ClientSignup = () => {
   const [signupInfo, setSignupInfo] = useState({
     name: "",
     email: "",
-    dob: "",
+    password: "",
     contactNumber: "",
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -99,10 +99,10 @@ const ClientSignup = () => {
             <br />
             <input
               type="text"
-              name="dob"
+              name="password"
               className="inp"
               required
-              value={signupInfo.dob}
+              value={signupInfo.password}
               onChange={changeHandler}
               placeholder="Date Of Birth"
             />
