@@ -455,7 +455,7 @@
 }
 
 .ongoingPoll{
-  margin-top: 7%;
+  margin-top: 3%;
   width: 50%;
 }
 .ongoingHeader{
@@ -677,6 +677,15 @@
   margin-top: 6rem;
 }
 
+.shrIcon{
+  margin-right: 5%;
+  margin-top: 1%;
+}
+
+.resPg{
+  width: 60%;
+}
+
 @media only screen and (max-width: 600px) {
   .votInfo {
     font-size: 1rem;
@@ -697,7 +706,7 @@
   }
   .homeBg{
     background-position: 62% 80%;
-    background-size: 130%;
+    background-size: 110%;
     margin-top: 15rem;
 
   }
@@ -707,7 +716,8 @@
   
     margin-left: 0%; */
     margin: auto;
-    margin-top: 80%;
+    margin-top: 70%;
+    margin-left: -10%;
     text-align: center;
   }
   .crtBtn{
@@ -768,7 +778,7 @@
     font-size: 1.3rem;
   }
   .stpInp{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding: 2px;
   }
   .stpInpF{
@@ -781,12 +791,78 @@
     margin-top: 25%;
   }
   .howSubtitle{
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+  }
+  .howExp{
+    font-size: 1.1rem;
+  }
+  .howSteps{
+    margin: auto;
+  }
+  .howStep{
+    padding: 1rem;
+    width: 100vw;
+  }
+  .step{
+    font-size: 2rem;
+  }
+  .stepTitle{
+    font-size: 1.5rem;
+  }
+  .stepDes{
+    font-size: 1.2rem;
   }
   .signBox{
     /* background-color: #3f2c8a; */
     justify-content: left !important;
 
   }
-
+  .loginBtn{
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+  .dash{
+    margin-top: 25%;
+  }
+  .dashPoll{
+    /* background-color: #68e5b2; */
+    display: flex !important;
+  }
+  .btnOpt{
+    /* background-color: #3f2c8a; */
+    width: 50vw !important;
+    justify-content: right !important;
+  }
+  .resPg{
+    width: 100%;
+  }
+  .resPage{
+    margin-top: 25% !important;
+  }
+  .stp{
+    font-size: 2.3rem;
+    margin-left: 4%;
+  }
+  .chtxt{
+    font-size: 1.2rem;
+  }
+  .pos{
+    font-size: 1.2rem;
+  }
+  .btn3,.btn4{
+    font-size: 1.2rem;
+  }
+  .posD{
+    font-size: 1.1rem;
+  }
+  .ongoingTitle{
+    font-size: 1.2rem;
+  }
+  .ongoingInp{
+    font-size: 1.1rem;
+    width: 100%;
+  }
+  .ongBtn{
+    font-size: 1.2rem;
+  }
 }

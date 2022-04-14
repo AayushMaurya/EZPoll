@@ -3,12 +3,14 @@ import { useParams } from "react-router";
 import { getPollInfo } from "../../apis/pollApi";
 import { useNavigate } from "react-router";
 import { Helmet } from "react-helmet";
+import { PieChart, Pie} from 'recharts';
 
 const PollResult = () => {
   const { id } = useParams();
   const [pollInfo, setPollInfo] = useState({});
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(async () => {
     const data = await getPollInfo(id);
@@ -25,12 +27,13 @@ const PollResult = () => {
     console.log("poll info: ", pollInfo);
   }, []);
 
+ 
   return (
     <>
     <Helmet>
       <title>Result • EZPoll</title>
     </Helmet>
-      <div className="container my-4">
+      <div className="container my-4 resPage">
           <div className="row">
               <h4 className="stp">Poll Results</h4>
           </div>
@@ -39,19 +42,15 @@ const PollResult = () => {
         ) : (
           <div className="row pollRes mx-1 my-2">
           {pollInfo.choices.map((choice, index) => (
-            <div key={index} className="row">
-              {choice.choiceValue}: {choice.count}
+            <div key={index} className="row resPg">
+              <div className="col chtxt">
+                {choice.choiceValue}  
+              </div>
+              <div className="col-2 chtxt">
+                {choice.count}  
+              </div>
             </div>
           ))}
-            {/* <div className="row">
-              {pollInfo.choice1} : {pollInfo.choice1Vote}
-            </div>
-            <div className="row">
-              {pollInfo.choice2} : {pollInfo.choice2Vote}
-            </div>
-            <div className="row">
-              {pollInfo.choice3} : {pollInfo.choice3Vote}
-            </div> */}
           </div>
         )}
       </div>

@@ -23,8 +23,8 @@ const OngoingPolls = () => {
                 <div className="col">
                     <input type="text" value={poll_id} onChange={changeHandler} placeholder = "Enter Poll ID" className="ongoingInp"/>
                 </div>
-                <div className="col">
-                    <button onClick={findPoll}  className = "findBtn btn2">Find</button>
+                <div className="col-6">
+                    <button onClick={findPoll}  className = "findBtn btn2 ongBtn">Find</button>
                 </div>
             </div>
         </div>

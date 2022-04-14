@@ -15,17 +15,17 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const menuToggle = document.getElementById("navbarSupportedContent");
+  
   const logoutHandler = () => {
     dispatch(clientLogout());
     navigate("/");
+    document.getElementsByClassName("navbar-toggler")[0].click()
   };
   const dashboardHandler = () => {
     navigate("/dash");
+    document.getElementsByClassName("navbar-toggler")[0].click()
   };
 
-  const navCollapse = () => {
-    menuToggle.toggle();
-  };
 
   return (
     <div>
@@ -54,24 +54,16 @@ export default function Navbar() {
             >
               {/* <Link to="/create" className='navLinks'><li className="nav-link text-dark">Create a Poll</li></Link> */}
               <Link to="/CreatePoll" className="navLinks">
-                <li className="nav-link text-dark" >
-                  Create Poll
-                </li>
+                <li className="nav-link text-dark">Create Poll</li>
               </Link>
               <Link to="/CreateVote" className="navLinks">
-                <li className="nav-link text-dark" >
-                  Voting Section
-                </li>
+                <li className="nav-link text-dark">Voting Section</li>
               </Link>
               <Link to="/Polls" className="navLinks">
-                <li className="nav-link text-dark" >
-                  Ongoing Polls
-                </li>
+                <li className="nav-link text-dark">Ongoing Polls</li>
               </Link>
               <Link to="./how" className="navLinks">
-                <li className="nav-link text-dark" >
-                  How it Works
-                </li>
+                <li className="nav-link text-dark">How it Works</li>
               </Link>
             </ul>
             <div className="usrRow">
@@ -84,7 +76,7 @@ export default function Navbar() {
 
                     <Dropdown.Menu>
                       <Dropdown.Item className="dropBtn">
-                        <div className="container">
+                        <div className="container clientSac">
                           <div className="row clientDetails">
                             <h5 className="clientName">
                               Hi ! {store.client.client.name}
@@ -124,12 +116,25 @@ export default function Navbar() {
                   </Dropdown>
                 ) : (
                   <div className="d-flex justify-content-end signBox">
-                    <Link to="/clientLogin" className="signLink mx-3">
+                    <Link
+                      to="/clientLogin"
+                      className="signLink mx-3"
+                      onClick={() =>
+                        document
+                          .getElementsByClassName("navbar-toggler")[0]
+                          .click()
+                      }
+                    >
                       <div className="text-dark">Login</div>
                     </Link>
                     <Link
                       to="/clientSignup"
                       className="signLink signUpLink mx-3"
+                      onClick={() =>
+                        document
+                          .getElementsByClassName("navbar-toggler")[0]
+                          .click()
+                      }
                     >
                       <div className="">Signup</div>
                     </Link>
