@@ -20,6 +20,8 @@ const ClientSignup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const store = useSelector((store) => store);
+  const [isMatching, setIsMatching] = useState(true);
+  const [isShowPass, setIsShowPass] = useState(false);
 
   // if client logged in then navigate to clientHome
   useEffect(() => {
@@ -27,6 +29,13 @@ const ClientSignup = () => {
       navigate("/client");
     }
   }, [store.client.isAuthenticated]);
+
+  useEffect(() => {
+    if(signupInfo.password === signupInfo.confirmPassword)
+      setIsMatching(false);
+    else
+      setIsMatching(true);
+  });
 
   const changeHandler = (e) => {
     let name = e.target.name;
@@ -99,7 +108,7 @@ const ClientSignup = () => {
             />
             <br />
             <input
-              type="password"
+              type={isShowPass ? "text" : "password"}
               name="password"
               className="inp"
               required
@@ -107,9 +116,10 @@ const ClientSignup = () => {
               onChange={changeHandler}
               placeholder="Password"
             />
+            <button type="button" onClick={() => {setIsShowPass(!isShowPass)}} >show</button>
             <br />
             <input
-              type="password"
+              type={isShowPass ? "text" : "password"}
               name="confirmPassword"
               className="inp"
               required
@@ -117,6 +127,8 @@ const ClientSignup = () => {
               onChange={changeHandler}
               placeholder="Confirm Password"
             />
+            {isMatching && <lable>password doesnot match</lable>}
+            <button type="button" onClick={() => {setIsShowPass(!isShowPass)}} >show</button>
             <br />
             <input
               type="tel"
