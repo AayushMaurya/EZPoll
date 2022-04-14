@@ -800,8 +800,8 @@
     margin: auto;
   }
   .howStep{
-    padding: 1rem;
-    width: 100vw;
+    padding: 2rem;
+    width: 100vw !important;
   }
   .step{
     font-size: 2rem;
