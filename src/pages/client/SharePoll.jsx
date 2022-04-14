@@ -9,8 +9,11 @@ import {
 } from "react-share";
 
 const SharePoll = (props) => {
-    // const url = `http://localhost:3000/poll/${props.share_id}`;
-    const url = "https://ezpoll-india.herokuapp.com"
+    const url = `https://ezpoll-india.herokuapp.com/${props.share_id}`;
+    if(props.share_id === null)
+        url = window.location.href;
+    // // const url = `http://localhost:3000/poll/${props.share_id}`;
+    // const url = `https://ezpoll-india.herokuapp.com/${props.share_id}`;
     const quot = "Give your vote to this poll";
 
     return (

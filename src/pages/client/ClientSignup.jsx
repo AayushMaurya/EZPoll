@@ -14,6 +14,7 @@ const ClientSignup = () => {
     email: "",
     password: "",
     contactNumber: "",
+    confirmPassword: ""
   });
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const ClientSignup = () => {
 
       const token = await checkClientLoginData({
         registrationNumber: data.response.registrationNumber,
-        password: data.response.dob,
+        password: signupInfo.password,
       });
       if (token) {
         const clientCridentials = decodeToken(token);
@@ -98,13 +99,23 @@ const ClientSignup = () => {
             />
             <br />
             <input
-              type="text"
+              type="password"
               name="password"
               className="inp"
               required
               value={signupInfo.password}
               onChange={changeHandler}
-              placeholder="Date Of Birth"
+              placeholder="Password"
+            />
+            <br />
+            <input
+              type="password"
+              name="confirmPassword"
+              className="inp"
+              required
+              value={signupInfo.confirmPassword}
+              onChange={changeHandler}
+              placeholder="Confirm Password"
             />
             <br />
             <input

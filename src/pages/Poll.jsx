@@ -40,7 +40,7 @@ const Poll = () => {
       alert(data.message);
       navigate("/polls");
     }
-    const text = `http://localhost:3000/poll/${id}`;
+    const text = `http://ezpoll-india.herokuapp.com/poll/${id}`;
     setULR(text);
   }, []);
 
@@ -74,7 +74,7 @@ const Poll = () => {
 
   // copy link
   const copy = async () => {
-    const text = `http://localhost:3000/poll/${id}`;
+    const text = `http://ezpoll-india.herokuapp.com/poll/${id}`;
     // setULR(text);
     await navigator.clipboard.writeText(text);
     // alert('Text copied');

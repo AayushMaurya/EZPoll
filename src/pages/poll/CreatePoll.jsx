@@ -40,7 +40,7 @@ const CreatePoll = () => {
   useEffect(() => {
     // iski wajah se back button press karne par wapas nhi ja pa rhe
     // agar login nhi hai to loop me ho ja rha hai
-    if (!store.client.isAuthenticated) navigate("/clientSignup");
+    if (!store.client.isAuthenticated) navigate("/clientLogin");
   }, []);
 
   const changeHandler1 = (e) => {
@@ -81,8 +81,7 @@ const CreatePoll = () => {
 
       setpoll_id(data.poll.poll_id);
 
-      const text = `http://localhost:3000/poll/${poll_id}`;
-      setULR(text);
+      setULR(`https://ezpoll-india.herokuapp.com/poll/${data.poll.poll_id}`);
     } else {
       setIsLoading(false);
       alert(data.message);
@@ -91,7 +90,7 @@ const CreatePoll = () => {
 
   // copy link
   const copy = async () => {
-    const text = `http://localhost:3000/poll/${poll_id}`;
+    const text = `https://ezpoll-india.herokuapp.com/poll/${poll_id}`;
     // setULR(text);
     await navigator.clipboard.writeText(text);
   };
@@ -229,7 +228,7 @@ const CreatePoll = () => {
               <div className="row crL">
                 <div className="col">
                   <h4 className="createdLink">
-                    http://localhost:3000/poll/{poll_id}
+                    http://ezpoll-india.herokuapp.com/poll/{poll_id}
                   </h4>
                 </div>
                 <div className="col">

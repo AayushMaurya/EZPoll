@@ -4,13 +4,15 @@ import { getPollInfo } from "../../apis/pollApi";
 import { useNavigate } from "react-router";
 import { Helmet } from "react-helmet";
 import { PieChart, Pie} from 'recharts';
+import SharePoll from "../client/SharePoll";
+import { FaShareAltSquare } from "react-icons/fa";
 
 const PollResult = () => {
   const { id } = useParams();
   const [pollInfo, setPollInfo] = useState({});
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-
+  const [isPopup, setIsPopup] = useState(false);
 
   useEffect(async () => {
     const data = await getPollInfo(id);
@@ -27,7 +29,11 @@ const PollResult = () => {
     console.log("poll info: ", pollInfo);
   }, []);
 
- 
+  // to share the poll
+  const share = () => {
+    setIsPopup(true);
+  }
+
   return (
     <>
     <Helmet>
@@ -51,9 +57,11 @@ const PollResult = () => {
               </div>
             </div>
           ))}
+          <button type="button" className="noneBtn" onClick={share}><FaShareAltSquare size="25" /></button>
           </div>
         )}
       </div>
+      {isPopup && <SharePoll handleClose={() => setIsPopup(false)} share_id={id}/>}
     </>
   );
 };
