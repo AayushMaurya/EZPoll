@@ -8,7 +8,6 @@
     "@fortawesome/react-fontawesome": "^0.1.17",
     "@popperjs/core": "^2.11.4",
     "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.25.0",
     "bootstrap": "^5.1.3",

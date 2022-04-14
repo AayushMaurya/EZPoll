@@ -3,6 +3,7 @@ import { setOTP } from "../../apis/voterApi";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { voterLogout } from "../../redux/actions/voterAction";
+import ThanksForVote from "./ThanksForVoting";
  
 const Popup = props => {
 
@@ -28,7 +29,7 @@ const Popup = props => {
         {
             alert(data.message);
             dispatch(voterLogout());
-            navigate("/");
+            <ThanksForVote/>;
         }
         else{
             alert(data.message);
