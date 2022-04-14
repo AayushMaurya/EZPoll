@@ -15,6 +15,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const menuToggle = document.getElementById("navbarSupportedContent");
+  
   const logoutHandler = () => {
     dispatch(clientLogout());
     navigate("/");
@@ -25,9 +26,6 @@ export default function Navbar() {
     document.getElementsByClassName("navbar-toggler")[0].click()
   };
 
-  const navCollapse = () => {
-    menuToggle.toggle();
-  };
 
   return (
     <div>
