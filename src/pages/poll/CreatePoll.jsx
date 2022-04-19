@@ -193,6 +193,9 @@ const CreatePoll = () => {
               </form>
             </div>
           </div>
+
+              
+
         </div>
       )}
 
@@ -209,15 +212,6 @@ const CreatePoll = () => {
             <div className="row">
               <h4 className="createdChoices">Choices</h4>
             </div>
-            {/* <div className="row">
-              <h4 className="creatdC">{pollinfo.choice1}</h4>
-            </div>
-            <div className="row">
-              <h4 className="creatdC">{pollinfo.choice2}</h4>
-            </div>
-            <div className="row">
-              <h4 className="creatdC">{pollinfo.choice3}</h4>
-            </div> */}
             {pollInfo.choices.map((c, index) => (
               <div key={index} className="row ">
               <h4 className="creatdC">{c.choiceValue}</h4>
@@ -231,12 +225,12 @@ const CreatePoll = () => {
                     http://ezpoll-india.herokuapp.com/poll/{poll_id}
                   </h4>
                 </div>
-                <div className="col">
+                <div className="col-2">
                   <button className="btn2 copyBtn" onClick={copy}>
                     Copy
                   </button>
                 </div>
-                <div className="col">
+                <div className="col-3">
                   <Button
                     type="submit"
                     onClick={handleShow}
