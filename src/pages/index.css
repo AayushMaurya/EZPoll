@@ -922,3 +922,11 @@
     font-size: 1rem;
   }
 }
+
+/* thanks for voting */
+
+@media only screen and (max-width: 600px){
+  .thanks{
+    margin-top: 25% !important;
+  }
+}

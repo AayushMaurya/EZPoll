@@ -10,6 +10,7 @@ const Popup = props => {
     const [otp, setOtp] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [isVoted, setIsVoted] = useDispatch(false);
 
     const formHandler = (e) =>{
         setOtp(e.target.value);
@@ -29,7 +30,7 @@ const Popup = props => {
         {
             alert(data.message);
             dispatch(voterLogout());
-            <ThanksForVote/>;
+            setIsVoted(true);
         }
         else{
             alert(data.message);
@@ -38,6 +39,7 @@ const Popup = props => {
     }
 
   return (
+    <>
     <div className="popup-box">
       <div className="box">
         <div className="row">
@@ -52,6 +54,8 @@ const Popup = props => {
         <span className="close-icon" onClick={props.handleClose}>x</span>
       </div>
     </div>
+    {isVoted && <ThanksForVote />}
+    </>
   );
 };
  
