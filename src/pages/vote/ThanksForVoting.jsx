@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const ThanksForVote = () => {
     const navigate = useNavigate();
@@ -16,9 +17,9 @@ const ThanksForVote = () => {
                 <h1 className="display-3">Thank You For Voting!</h1>
                 <p className="lead">Result for this vote will be reflected soon.</p>
                 <hr />
-                    {/* <p>
-                        Having trouble? <a href="">Contact us</a>
-                    </p> */}
+                    <p>
+                        Having trouble? <Link to="/contact">Contact us</Link>
+                    </p>
                     <p className="lead">
                         <button onClick={goToHome} className="btn btn-primary btn-sm" href="https://bootstrapcreative.com/" role="button">Continue to homepage</button>
                     </p>
