@@ -65,6 +65,9 @@ export default function Navbar() {
               <Link to="./how" className="navLinks">
                 <li className="nav-link text-dark">How it Works</li>
               </Link>
+              <Link to="./contact" className="navLinks">
+                <li className="nav-link text-dark">Contact Us</li>
+              </Link>
             </ul>
             <div className="usrRow">
               <div className="usrBtn">
