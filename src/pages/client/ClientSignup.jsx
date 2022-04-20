@@ -7,6 +7,7 @@ import { setClient } from "../../redux/actions/clientAction";
 import { Link } from "react-router-dom";
 import './clientCss.css';
 import { Helmet } from "react-helmet"
+import { FaRegEye } from "react-icons/fa";
 
 const ClientSignup = () => {
   const [signupInfo, setSignupInfo] = useState({
@@ -107,19 +108,21 @@ const ClientSignup = () => {
               placeholder="Email"
             />
             <br />
-            <input
-              type={isShowPass ? "text" : "password"}
-              name="password"
-              className="inp"
-              required
-              value={signupInfo.password}
-              onChange={changeHandler}
-              placeholder="Password"
-            />
-            <button type="button" onClick={() => {setIsShowPass(!isShowPass)}} >show</button>
+            <div className="row m-auto">
+              <input
+                type={isShowPass ? "text" : "password"}
+                name="password"
+                className="inp passInp"
+                required
+                value={signupInfo.password}
+                onChange={changeHandler}
+                placeholder="Password"
+              />
+              <button type="button" className="eyeBtn" onClick={() => {setIsShowPass(!isShowPass)}} > < FaRegEye size="25" /> </button>
+            </div>
             <br />
             <input
-              type={isShowPass ? "text" : "password"}
+              type = "password"
               name="confirmPassword"
               className="inp"
               required
@@ -128,7 +131,6 @@ const ClientSignup = () => {
               placeholder="Confirm Password"
             />
             {isMatching && <lable>password doesnot match</lable>}
-            <button type="button" onClick={() => {setIsShowPass(!isShowPass)}} >show</button>
             <br />
             <input
               type="tel"

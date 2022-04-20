@@ -446,7 +446,7 @@
   font-size: 15px;
 }
 .createdLink{
-  font-size: 18px;
+  font-size: 0.9rem;
 }
 .copyBtn{
   font-size: 13px;
@@ -567,6 +567,20 @@
   outline: none;
 }
 
+.passInp{
+  width: 26%;
+  position: fixed;
+}
+.eyeBtn{
+  background-color: transparent;
+  border: none;
+  width: 10%;
+  height: 2rem;
+  margin-top: 3%;
+  position: relative;
+  margin-left: 87%;
+  opacity: 0.6;
+}
 /* for popup box */
 
 .popup-box {
@@ -684,6 +698,10 @@
 
 .resPg{
   width: 60%;
+}
+
+.otpBtn{
+  font-size: 20px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -864,5 +882,43 @@
   }
   .ongBtn{
     font-size: 1.2rem;
+  }
+  
+  .cr{
+    margin-top: 25%;
+  }
+  .created{
+    width: 100%;
+  }
+  .crH{
+    font-size: 1rem;
+  }
+  .showQrBtn{
+    width: 8rem !important;
+  }
+  .pollSec{
+    width: 90%;
+    margin-top: 25%;
+  }
+  .shareSec{
+    width: 90%;
+  }
+  .pollChoices{
+    font-size: 1.4rem;
+  }
+  .pollTitle{
+    font-size: 1.5rem;
+  }
+  .shTitle{
+    font-size: 1.3rem;
+  }
+  .shLink{
+    font-size: 1.1rem;
+  }
+  .link{
+    font-size: 1rem;
+  }
+  .pollsubmitBtn{
+    font-size: 1rem;
   }
 }

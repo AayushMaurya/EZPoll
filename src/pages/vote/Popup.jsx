@@ -40,10 +40,15 @@ const Popup = props => {
   return (
     <div className="popup-box">
       <div className="box">
-        <h2>Enter your otp</h2>
-        <input type="text" value={otp} onChange={formHandler} />
-        <br />  
-        <button onClick={submitOtp} >submit</button>
+        <div className="row">
+          <h2>Enter your otp</h2>
+        </div>
+        <div className="row">
+          <div className="col">
+            <input type="text" value={otp} onChange={formHandler} />
+          </div>
+            <button onClick={submitOtp} className = "btn3 otpBtn" >submit</button>
+        </div>
         <span className="close-icon" onClick={props.handleClose}>x</span>
       </div>
     </div>

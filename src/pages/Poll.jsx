@@ -88,7 +88,7 @@ const Poll = () => {
       {!isPoll && <h1> Loading poll {id} ...</h1>}
       {isPoll && (
         <div>
-          <div className="container pollSec">
+          <div className="container pollSec ">
             <div className="row pollHeader">
               <h1 className="pollTitle">{pollinfo.title}</h1>
               <h3 className="pollDes">{pollinfo.description}</h3>
