@@ -29,7 +29,7 @@ const Popup = props => {
         {
             alert(data.message);
             dispatch(voterLogout());
-            // <ThanksForVote/>;
+            <ThanksForVote/>;
         }
         else{
             alert(data.message);
