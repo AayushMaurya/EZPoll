@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { contactCreater } from "../apis/contactapi";
+import { useNavigate } from "react-router";
 
 const Contact = () => {
+    const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     subject: "",
@@ -26,6 +28,7 @@ const Contact = () => {
     if (data.success) {
       alert(data.message);
       setIsLoading(false);
+      navigate("/");
     } else {
       alert(data.message);
       setIsLoading(false);

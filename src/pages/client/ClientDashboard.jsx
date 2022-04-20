@@ -96,7 +96,7 @@ const ClientDashboard = () => {
           ))}
         </div>
       )}
-      {isPopup && <SharePoll handleClose={() => setIsPopup(false)} share_id={share_id} />}
+      {isPopup && <SharePoll handleClose={() => setIsPopup(false)} share_id={share_id} name="poll"/>}
     </>
   );
 };

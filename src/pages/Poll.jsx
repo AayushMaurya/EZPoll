@@ -7,6 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
 import QRCode from "qrcode.react";
 import Helmet from "react-helmet";
+import PollExpired from "./poll/PollExpired";
 
 const Poll = () => {
   const { id } = useParams();
@@ -24,11 +25,16 @@ const Poll = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [isExpired, setIsExpired] = useState(false);
 
   useEffect(async () => {
+    var today = new Date()
     const data = await getPollInfo(id);
     console.log(data);
     if (data.success) {
+      console.log("Exp Data: ", data.result[0].exp);
+      if(data.result[0].exp < today);
+        setIsExpired(true);
       setPollinfo(data.result[0]);
       // console.log("pollinfo: ", pollinfo);
       setIsPoll(true);
@@ -86,7 +92,7 @@ const Poll = () => {
       <title>Poll</title>
     </Helmet>
       {!isPoll && <h1> Loading poll {id} ...</h1>}
-      {isPoll && (
+      {isPoll && (!isExpired && 
         <div>
           <div className="container pollSec ">
             <div className="row pollHeader">
@@ -181,7 +187,9 @@ const Poll = () => {
             </div>
           </div>
         </div>
+      
       )}
+      {isExpired && <PollExpired />}
     </>
   );
 };

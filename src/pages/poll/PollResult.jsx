@@ -61,7 +61,7 @@ const PollResult = () => {
           </div>
         )}
       </div>
-      {isPopup && <SharePoll handleClose={() => setIsPopup(false)} share_id={id}/>}
+      {isPopup && <SharePoll handleClose={() => setIsPopup(false)} share_id={id} name="pollResult" />}
     </>
   );
 };
