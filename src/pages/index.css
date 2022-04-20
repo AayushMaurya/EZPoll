@@ -567,6 +567,20 @@
   outline: none;
 }
 
+.passInp{
+  width: 26%;
+  position: fixed;
+}
+.eyeBtn{
+  background-color: transparent;
+  border: none;
+  width: 10%;
+  height: 2rem;
+  margin-top: 3%;
+  position: relative;
+  margin-left: 87%;
+  opacity: 0.6;
+}
 /* for popup box */
 
 .popup-box {
@@ -684,6 +698,10 @@
 
 .resPg{
   width: 60%;
+}
+
+.otpBtn{
+  font-size: 20px;
 }
 
 @media only screen and (max-width: 600px) {
