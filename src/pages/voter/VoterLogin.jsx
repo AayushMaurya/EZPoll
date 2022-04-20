@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setVoter } from "../../redux/actions/voterAction";
 import { decodeToken } from "../../utils/decodeToken";
+import { clientLogout } from "../../redux/actions/clientAction";
 import { Helmet } from "react-helmet";
 
 const VoterLogin = () => {
@@ -44,6 +45,7 @@ const VoterLogin = () => {
     if (data.success) {
       const voterCridentials = decodeToken(data.token);
       alert("loged in");
+      dispatch(clientLogout());
       dispatch(setVoter(voterCridentials));
     } else {
       alert(data.message);

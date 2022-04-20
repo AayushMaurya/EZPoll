@@ -29,6 +29,7 @@ import VoterLogin from "./pages/voter/VoterLogin";
 import VoterHome from "./pages/voter/VoterHome";
 import Vote from "./pages/vote/Vote";
 import ThanksForVote from "./pages/vote/ThanksForVoting";
+import Contact from "./pages/Contact";
 import { setCandidate, setPosition, setstep } from "./redux/actions/createVoteAction";
 
 // check for voter
@@ -119,6 +120,7 @@ function App() {
           <Route exact path="/voterHome" element={<VoterHome />} />
           <Route exact path="/vote/:id" element={<Vote />} />
           <Route exact path="/thanks" element={<ThanksForVote />} />
+          <Route exact path="/contact" element={<Contact />} />
         </Routes>
       </Router>
     </div>

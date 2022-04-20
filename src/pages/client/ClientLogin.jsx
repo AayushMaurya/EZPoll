@@ -74,7 +74,7 @@ const ClientLogin = () => {
             <br />
             <input
               className="inp"
-              type="text"
+              type="password"
               name="password"
               onChange={changeHandler}
               value={loginInfo.password}
