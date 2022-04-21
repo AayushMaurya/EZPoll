@@ -49,6 +49,21 @@ export const getAllPolls = async () => {
     }
 }
 
+export const getAllPosition = async() => {
+    try{
+        const { data } = await axios.get("https://ezserver.herokuapp.com/api/client/positionId");
+        return data;
+    }
+    catch(err)
+    {
+        console.log(err);
+        return {
+            success: false,
+            message: "cannot get votes history at this moment"
+        }
+    }
+}
+
 export const deletePoll = async (poll_id) => {
     try{
         const { data } = await axios.get(`https://ezserver.herokuapp.com/api/poll/delete/${poll_id}`);

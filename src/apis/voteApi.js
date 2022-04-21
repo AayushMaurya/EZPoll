@@ -64,3 +64,20 @@ export const getVoteInfo = async (vote_id) => {
     }
 }
 
+export const getVoteResult = async(position_id) => {
+    const uri = "https://ezserver.herokuapp.com/api/voter/voteCount/" + position_id;
+    console.log(uri);
+    try{
+        const { data } = await axios.get(uri);
+        console.log("received data: ", data);
+        return data;
+    }
+    catch(err){
+        console.log(err);
+        return {
+            success: false,
+            message: "cannot load the vote at this moment"
+        };
+    }
+}
+

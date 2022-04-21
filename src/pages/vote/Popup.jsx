@@ -31,6 +31,7 @@ const Popup = props => {
             alert(data.message);
             dispatch(voterLogout());
             setIsVoted(true);
+            navigate('/thanks')
         }
         else{
             alert(data.message);

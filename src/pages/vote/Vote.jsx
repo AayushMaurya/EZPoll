@@ -55,6 +55,7 @@ const Vote = () => {
     console.log("user chocice : ", userChoice);
 
     const data = await giveVote(userChoice);
+    console.log(data);
     if (data.success) {
       alert(data.message);
       if (data.message === "Already voted") {
